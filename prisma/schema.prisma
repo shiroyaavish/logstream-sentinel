@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+// Use an Enum for better code clarity
+enum LogLevel {
+  INFO
+  WARN
+  ERROR
+  DEBUG
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  name      String?
+  password  String
+  timestamp DateTime  @default(now())
+  projects  Project[]
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  timestamp   DateTime @default(now())
+  apiKeys     ApiKey[]
+}
+
+model ApiKey {
+  id        String   @id @default(uuid())
+  key       String   @unique // This is the actual string used in headers
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  status    Int      @default(0) // 0 = active, 1 = revoked
+  timestamp DateTime @default(now())
+  logs      Log[]
+}
+
+model Log {
+  // Use BigInt for massive scale performance
+  id        BigInt   @id @default(autoincrement())
+  apiKeyId  String
+  apiKey    ApiKey   @relation(fields: [apiKeyId], references: [id])
+  message   String
+  metadata  Json // Perfect for your 'JSONB' storage
+  level     LogLevel @default(INFO)
+  timestamp DateTime @default(now())
+
+  // CRITICAL: Composite index for fast dashboard queries
+  @@index([apiKeyId, timestamp])
+}
+

@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// Use an Enum for better code clarity\nenum LogLevel {\n  INFO\n  WARN\n  ERROR\n  DEBUG\n}\n\nmodel User {\n  id        String    @id @default(uuid())\n  email     String    @unique\n  name      String?\n  password  String\n  timestamp DateTime  @default(now())\n  projects  Project[]\n}\n\nmodel Project {\n  id          String   @id @default(uuid())\n  name        String\n  description String?\n  userId      String\n  user        User     @relation(fields: [userId], references: [id])\n  timestamp   DateTime @default(now())\n  apiKeys     ApiKey[]\n}\n\nmodel ApiKey {\n  id        String   @id @default(uuid())\n  key       String   @unique // This is the actual string used in headers\n  projectId String\n  project   Project  @relation(fields: [projectId], references: [id])\n  status    Int      @default(0) // 0 = active, 1 = revoked\n  timestamp DateTime @default(now())\n  logs      Log[]\n}\n\nmodel Log {\n  // Use BigInt for massive scale performance\n  id        BigInt   @id @default(autoincrement())\n  apiKeyId  String\n  apiKey    ApiKey   @relation(fields: [apiKeyId], references: [id])\n  message   String\n  metadata  Json // Perfect for your 'JSONB' storage\n  level     LogLevel @default(INFO)\n  timestamp DateTime @default(now())\n\n  // CRITICAL: Composite index for fast dashboard queries\n  @@index([apiKeyId, timestamp])\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// Use an Enum for better code clarity\nenum LogLevel {\n  INFO\n  WARN\n  ERROR\n  DEBUG\n}\n\nmodel user {\n  id        BigInt    @id @default(autoincrement())\n  email     String    @unique\n  name      String?\n  password  String\n  timestamp DateTime  @default(now())\n  projects  project[]\n  sessions  session[]\n}\n\nmodel project {\n  id          BigInt    @id @default(autoincrement())\n  name        String\n  description String?\n  user_id     BigInt\n  user        user      @relation(fields: [user_id], references: [id])\n  timestamp   DateTime  @default(now())\n  api_keys    api_key[]\n}\n\nmodel api_key {\n  id         BigInt   @id @default(autoincrement())\n  key        String   @unique // This is the actual string used in headers\n  project_id BigInt\n  project    project  @relation(fields: [project_id], references: [id])\n  status     Int      @default(0) // 0 = active, 1 = revoked\n  timestamp  DateTime @default(now())\n  logs       log[]\n}\n\nmodel log {\n  // Use BigInt for massive scale performance\n  id         BigInt   @id @default(autoincrement())\n  api_key_id BigInt\n  api_key    api_key  @relation(fields: [api_key_id], references: [id])\n  message    String\n  metadata   Json // Perfect for your 'JSONB' storage\n  level      LogLevel @default(INFO)\n  timestamp  DateTime @default(now())\n\n  // CRITICAL: Composite index for fast dashboard queries\n  @@index([api_key_id, timestamp])\n}\n\nmodel session {\n  id         BigInt   @id @default(autoincrement())\n  user_id    BigInt\n  user       user     @relation(fields: [user_id], references: [id])\n  session_id String\n  timestamp  DateTime @default(now())\n  user_agent String\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ProjectToUser\"}],\"dbName\":null},\"Project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProjectToUser\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"apiKeys\",\"kind\":\"object\",\"type\":\"ApiKey\",\"relationName\":\"ApiKeyToProject\"}],\"dbName\":null},\"ApiKey\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"projectId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"project\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ApiKeyToProject\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"logs\",\"kind\":\"object\",\"type\":\"Log\",\"relationName\":\"ApiKeyToLog\"}],\"dbName\":null},\"Log\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"apiKeyId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"apiKey\",\"kind\":\"object\",\"type\":\"ApiKey\",\"relationName\":\"ApiKeyToLog\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"level\",\"kind\":\"enum\",\"type\":\"LogLevel\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"user\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"project\",\"relationName\":\"projectTouser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"session\",\"relationName\":\"sessionTouser\"}],\"dbName\":null},\"project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"projectTouser\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"api_keys\",\"kind\":\"object\",\"type\":\"api_key\",\"relationName\":\"api_keyToproject\"}],\"dbName\":null},\"api_key\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"project_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"project\",\"kind\":\"object\",\"type\":\"project\",\"relationName\":\"api_keyToproject\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"logs\",\"kind\":\"object\",\"type\":\"log\",\"relationName\":\"api_keyTolog\"}],\"dbName\":null},\"log\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"api_key_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"api_key\",\"kind\":\"object\",\"type\":\"api_key\",\"relationName\":\"api_keyTolog\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"level\",\"kind\":\"enum\",\"type\":\"LogLevel\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"BigInt\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"sessionTouser\"},{\"name\":\"session_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user_agent\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -177,44 +177,54 @@ export interface PrismaClient<
   }>>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * `prisma.user`: Exposes CRUD operations for the **user** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Users
     * const users = await prisma.user.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
+  get user(): Prisma.userDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.project`: Exposes CRUD operations for the **Project** model.
+   * `prisma.project`: Exposes CRUD operations for the **project** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Projects
     * const projects = await prisma.project.findMany()
     * ```
     */
-  get project(): Prisma.ProjectDelegate<ExtArgs, { omit: OmitOpts }>;
+  get project(): Prisma.projectDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.apiKey`: Exposes CRUD operations for the **ApiKey** model.
+   * `prisma.api_key`: Exposes CRUD operations for the **api_key** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more ApiKeys
-    * const apiKeys = await prisma.apiKey.findMany()
+    * // Fetch zero or more Api_keys
+    * const api_keys = await prisma.api_key.findMany()
     * ```
     */
-  get apiKey(): Prisma.ApiKeyDelegate<ExtArgs, { omit: OmitOpts }>;
+  get api_key(): Prisma.api_keyDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.log`: Exposes CRUD operations for the **Log** model.
+   * `prisma.log`: Exposes CRUD operations for the **log** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Logs
     * const logs = await prisma.log.findMany()
     * ```
     */
-  get log(): Prisma.LogDelegate<ExtArgs, { omit: OmitOpts }>;
+  get log(): Prisma.logDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.session`: Exposes CRUD operations for the **session** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sessions
+    * const sessions = await prisma.session.findMany()
+    * ```
+    */
+  get session(): Prisma.sessionDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

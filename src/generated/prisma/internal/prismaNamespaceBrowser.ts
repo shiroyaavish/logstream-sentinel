@@ -51,10 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User',
-  Project: 'Project',
-  ApiKey: 'ApiKey',
-  Log: 'Log'
+  user: 'user',
+  project: 'project',
+  api_key: 'api_key',
+  log: 'log',
+  session: 'session'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -88,27 +89,27 @@ export const ProjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  userId: 'userId',
+  user_id: 'user_id',
   timestamp: 'timestamp'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
-export const ApiKeyScalarFieldEnum = {
+export const Api_keyScalarFieldEnum = {
   id: 'id',
   key: 'key',
-  projectId: 'projectId',
+  project_id: 'project_id',
   status: 'status',
   timestamp: 'timestamp'
 } as const
 
-export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
+export type Api_keyScalarFieldEnum = (typeof Api_keyScalarFieldEnum)[keyof typeof Api_keyScalarFieldEnum]
 
 
 export const LogScalarFieldEnum = {
   id: 'id',
-  apiKeyId: 'apiKeyId',
+  api_key_id: 'api_key_id',
   message: 'message',
   metadata: 'metadata',
   level: 'level',
@@ -116,6 +117,17 @@ export const LogScalarFieldEnum = {
 } as const
 
 export type LogScalarFieldEnum = (typeof LogScalarFieldEnum)[keyof typeof LogScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  session_id: 'session_id',
+  timestamp: 'timestamp',
+  user_agent: 'user_agent'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -4,7 +4,7 @@
 // biome-ignore-all lint: generated file
 // @ts-nocheck 
 /*
- * This file exports the `Log` model and its related types.
+ * This file exports the `log` model and its related types.
  *
  * 🟢 You can import this file directly.
  */
@@ -13,10 +13,10 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
- * Model Log
+ * Model log
  * 
  */
-export type LogModel = runtime.Types.Result.DefaultSelection<Prisma.$LogPayload>
+export type logModel = runtime.Types.Result.DefaultSelection<Prisma.$logPayload>
 
 export type AggregateLog = {
   _count: LogCountAggregateOutputType | null
@@ -28,15 +28,17 @@ export type AggregateLog = {
 
 export type LogAvgAggregateOutputType = {
   id: number | null
+  api_key_id: number | null
 }
 
 export type LogSumAggregateOutputType = {
   id: bigint | null
+  api_key_id: bigint | null
 }
 
 export type LogMinAggregateOutputType = {
   id: bigint | null
-  apiKeyId: string | null
+  api_key_id: bigint | null
   message: string | null
   level: $Enums.LogLevel | null
   timestamp: Date | null
@@ -44,7 +46,7 @@ export type LogMinAggregateOutputType = {
 
 export type LogMaxAggregateOutputType = {
   id: bigint | null
-  apiKeyId: string | null
+  api_key_id: bigint | null
   message: string | null
   level: $Enums.LogLevel | null
   timestamp: Date | null
@@ -52,7 +54,7 @@ export type LogMaxAggregateOutputType = {
 
 export type LogCountAggregateOutputType = {
   id: number
-  apiKeyId: number
+  api_key_id: number
   message: number
   metadata: number
   level: number
@@ -63,15 +65,17 @@ export type LogCountAggregateOutputType = {
 
 export type LogAvgAggregateInputType = {
   id?: true
+  api_key_id?: true
 }
 
 export type LogSumAggregateInputType = {
   id?: true
+  api_key_id?: true
 }
 
 export type LogMinAggregateInputType = {
   id?: true
-  apiKeyId?: true
+  api_key_id?: true
   message?: true
   level?: true
   timestamp?: true
@@ -79,7 +83,7 @@ export type LogMinAggregateInputType = {
 
 export type LogMaxAggregateInputType = {
   id?: true
-  apiKeyId?: true
+  api_key_id?: true
   message?: true
   level?: true
   timestamp?: true
@@ -87,7 +91,7 @@ export type LogMaxAggregateInputType = {
 
 export type LogCountAggregateInputType = {
   id?: true
-  apiKeyId?: true
+  api_key_id?: true
   message?: true
   metadata?: true
   level?: true
@@ -97,37 +101,37 @@ export type LogCountAggregateInputType = {
 
 export type LogAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which Log to aggregate.
+   * Filter which log to aggregate.
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Logs to fetch.
+   * Determine the order of logs to fetch.
    */
-  orderBy?: Prisma.LogOrderByWithRelationInput | Prisma.LogOrderByWithRelationInput[]
+  orderBy?: Prisma.logOrderByWithRelationInput | Prisma.logOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
    * Sets the start position
    */
-  cursor?: Prisma.LogWhereUniqueInput
+  cursor?: Prisma.logWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Logs from the position of the cursor.
+   * Take `±n` logs from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Logs.
+   * Skip the first `n` logs.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Count returned Logs
+   * Count returned logs
   **/
   _count?: true | LogCountAggregateInputType
   /**
@@ -167,11 +171,11 @@ export type GetLogAggregateType<T extends LogAggregateArgs> = {
 
 
 
-export type LogGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LogWhereInput
-  orderBy?: Prisma.LogOrderByWithAggregationInput | Prisma.LogOrderByWithAggregationInput[]
+export type logGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.logWhereInput
+  orderBy?: Prisma.logOrderByWithAggregationInput | Prisma.logOrderByWithAggregationInput[]
   by: Prisma.LogScalarFieldEnum[] | Prisma.LogScalarFieldEnum
-  having?: Prisma.LogScalarWhereWithAggregatesInput
+  having?: Prisma.logScalarWhereWithAggregatesInput
   take?: number
   skip?: number
   _count?: LogCountAggregateInputType | true
@@ -183,7 +187,7 @@ export type LogGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type LogGroupByOutputType = {
   id: bigint
-  apiKeyId: string
+  api_key_id: bigint
   message: string
   metadata: runtime.JsonValue
   level: $Enums.LogLevel
@@ -195,7 +199,7 @@ export type LogGroupByOutputType = {
   _max: LogMaxAggregateOutputType | null
 }
 
-type GetLogGroupByPayload<T extends LogGroupByArgs> = Prisma.PrismaPromise<
+type GetLogGroupByPayload<T extends logGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LogGroupByOutputType, T['by']> &
       {
@@ -210,114 +214,114 @@ type GetLogGroupByPayload<T extends LogGroupByArgs> = Prisma.PrismaPromise<
 
 
 
-export type LogWhereInput = {
-  AND?: Prisma.LogWhereInput | Prisma.LogWhereInput[]
-  OR?: Prisma.LogWhereInput[]
-  NOT?: Prisma.LogWhereInput | Prisma.LogWhereInput[]
-  id?: Prisma.BigIntFilter<"Log"> | bigint | number
-  apiKeyId?: Prisma.StringFilter<"Log"> | string
-  message?: Prisma.StringFilter<"Log"> | string
-  metadata?: Prisma.JsonFilter<"Log">
-  level?: Prisma.EnumLogLevelFilter<"Log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFilter<"Log"> | Date | string
-  apiKey?: Prisma.XOR<Prisma.ApiKeyScalarRelationFilter, Prisma.ApiKeyWhereInput>
+export type logWhereInput = {
+  AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
+  OR?: Prisma.logWhereInput[]
+  NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
+  id?: Prisma.BigIntFilter<"log"> | bigint | number
+  api_key_id?: Prisma.BigIntFilter<"log"> | bigint | number
+  message?: Prisma.StringFilter<"log"> | string
+  metadata?: Prisma.JsonFilter<"log">
+  level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
+  timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
+  api_key?: Prisma.XOR<Prisma.Api_keyScalarRelationFilter, Prisma.api_keyWhereInput>
 }
 
-export type LogOrderByWithRelationInput = {
+export type logOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  apiKeyId?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
-  apiKey?: Prisma.ApiKeyOrderByWithRelationInput
+  api_key?: Prisma.api_keyOrderByWithRelationInput
 }
 
-export type LogWhereUniqueInput = Prisma.AtLeast<{
+export type logWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
-  AND?: Prisma.LogWhereInput | Prisma.LogWhereInput[]
-  OR?: Prisma.LogWhereInput[]
-  NOT?: Prisma.LogWhereInput | Prisma.LogWhereInput[]
-  apiKeyId?: Prisma.StringFilter<"Log"> | string
-  message?: Prisma.StringFilter<"Log"> | string
-  metadata?: Prisma.JsonFilter<"Log">
-  level?: Prisma.EnumLogLevelFilter<"Log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFilter<"Log"> | Date | string
-  apiKey?: Prisma.XOR<Prisma.ApiKeyScalarRelationFilter, Prisma.ApiKeyWhereInput>
+  AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
+  OR?: Prisma.logWhereInput[]
+  NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
+  api_key_id?: Prisma.BigIntFilter<"log"> | bigint | number
+  message?: Prisma.StringFilter<"log"> | string
+  metadata?: Prisma.JsonFilter<"log">
+  level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
+  timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
+  api_key?: Prisma.XOR<Prisma.Api_keyScalarRelationFilter, Prisma.api_keyWhereInput>
 }, "id">
 
-export type LogOrderByWithAggregationInput = {
+export type logOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  apiKeyId?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
-  _count?: Prisma.LogCountOrderByAggregateInput
-  _avg?: Prisma.LogAvgOrderByAggregateInput
-  _max?: Prisma.LogMaxOrderByAggregateInput
-  _min?: Prisma.LogMinOrderByAggregateInput
-  _sum?: Prisma.LogSumOrderByAggregateInput
+  _count?: Prisma.logCountOrderByAggregateInput
+  _avg?: Prisma.logAvgOrderByAggregateInput
+  _max?: Prisma.logMaxOrderByAggregateInput
+  _min?: Prisma.logMinOrderByAggregateInput
+  _sum?: Prisma.logSumOrderByAggregateInput
 }
 
-export type LogScalarWhereWithAggregatesInput = {
-  AND?: Prisma.LogScalarWhereWithAggregatesInput | Prisma.LogScalarWhereWithAggregatesInput[]
-  OR?: Prisma.LogScalarWhereWithAggregatesInput[]
-  NOT?: Prisma.LogScalarWhereWithAggregatesInput | Prisma.LogScalarWhereWithAggregatesInput[]
-  id?: Prisma.BigIntWithAggregatesFilter<"Log"> | bigint | number
-  apiKeyId?: Prisma.StringWithAggregatesFilter<"Log"> | string
-  message?: Prisma.StringWithAggregatesFilter<"Log"> | string
-  metadata?: Prisma.JsonWithAggregatesFilter<"Log">
-  level?: Prisma.EnumLogLevelWithAggregatesFilter<"Log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeWithAggregatesFilter<"Log"> | Date | string
+export type logScalarWhereWithAggregatesInput = {
+  AND?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
+  OR?: Prisma.logScalarWhereWithAggregatesInput[]
+  NOT?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
+  id?: Prisma.BigIntWithAggregatesFilter<"log"> | bigint | number
+  api_key_id?: Prisma.BigIntWithAggregatesFilter<"log"> | bigint | number
+  message?: Prisma.StringWithAggregatesFilter<"log"> | string
+  metadata?: Prisma.JsonWithAggregatesFilter<"log">
+  level?: Prisma.EnumLogLevelWithAggregatesFilter<"log"> | $Enums.LogLevel
+  timestamp?: Prisma.DateTimeWithAggregatesFilter<"log"> | Date | string
 }
 
-export type LogCreateInput = {
+export type logCreateInput = {
   id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
   timestamp?: Date | string
-  apiKey: Prisma.ApiKeyCreateNestedOneWithoutLogsInput
+  api_key: Prisma.api_keyCreateNestedOneWithoutLogsInput
 }
 
-export type LogUncheckedCreateInput = {
+export type logUncheckedCreateInput = {
   id?: bigint | number
-  apiKeyId: string
-  message: string
-  metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  level?: $Enums.LogLevel
-  timestamp?: Date | string
-}
-
-export type LogUpdateInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  message?: Prisma.StringFieldUpdateOperationsInput | string
-  metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  apiKey?: Prisma.ApiKeyUpdateOneRequiredWithoutLogsNestedInput
-}
-
-export type LogUncheckedUpdateInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  apiKeyId?: Prisma.StringFieldUpdateOperationsInput | string
-  message?: Prisma.StringFieldUpdateOperationsInput | string
-  metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LogCreateManyInput = {
-  id?: bigint | number
-  apiKeyId: string
+  api_key_id: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
   timestamp?: Date | string
 }
 
-export type LogUpdateManyMutationInput = {
+export type logUpdateInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
+  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  api_key?: Prisma.api_keyUpdateOneRequiredWithoutLogsNestedInput
+}
+
+export type logUncheckedUpdateInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  api_key_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  message?: Prisma.StringFieldUpdateOperationsInput | string
+  metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
+  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type logCreateManyInput = {
+  id?: bigint | number
+  api_key_id: bigint | number
+  message: string
+  metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  level?: $Enums.LogLevel
+  timestamp?: Date | string
+}
+
+export type logUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -325,9 +329,9 @@ export type LogUpdateManyMutationInput = {
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LogUncheckedUpdateManyInput = {
+export type logUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  apiKeyId?: Prisma.StringFieldUpdateOperationsInput | string
+  api_key_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -335,103 +339,97 @@ export type LogUncheckedUpdateManyInput = {
 }
 
 export type LogListRelationFilter = {
-  every?: Prisma.LogWhereInput
-  some?: Prisma.LogWhereInput
-  none?: Prisma.LogWhereInput
+  every?: Prisma.logWhereInput
+  some?: Prisma.logWhereInput
+  none?: Prisma.logWhereInput
 }
 
-export type LogOrderByRelationAggregateInput = {
+export type logOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type LogCountOrderByAggregateInput = {
+export type logCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  apiKeyId?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
 }
 
-export type LogAvgOrderByAggregateInput = {
+export type logAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
 }
 
-export type LogMaxOrderByAggregateInput = {
+export type logMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  apiKeyId?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
 }
 
-export type LogMinOrderByAggregateInput = {
+export type logMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  apiKeyId?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
 }
 
-export type LogSumOrderByAggregateInput = {
+export type logSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  api_key_id?: Prisma.SortOrder
 }
 
-export type LogCreateNestedManyWithoutApiKeyInput = {
-  create?: Prisma.XOR<Prisma.LogCreateWithoutApiKeyInput, Prisma.LogUncheckedCreateWithoutApiKeyInput> | Prisma.LogCreateWithoutApiKeyInput[] | Prisma.LogUncheckedCreateWithoutApiKeyInput[]
-  connectOrCreate?: Prisma.LogCreateOrConnectWithoutApiKeyInput | Prisma.LogCreateOrConnectWithoutApiKeyInput[]
-  createMany?: Prisma.LogCreateManyApiKeyInputEnvelope
-  connect?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
+export type logCreateNestedManyWithoutApi_keyInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
+  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+  connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
 }
 
-export type LogUncheckedCreateNestedManyWithoutApiKeyInput = {
-  create?: Prisma.XOR<Prisma.LogCreateWithoutApiKeyInput, Prisma.LogUncheckedCreateWithoutApiKeyInput> | Prisma.LogCreateWithoutApiKeyInput[] | Prisma.LogUncheckedCreateWithoutApiKeyInput[]
-  connectOrCreate?: Prisma.LogCreateOrConnectWithoutApiKeyInput | Prisma.LogCreateOrConnectWithoutApiKeyInput[]
-  createMany?: Prisma.LogCreateManyApiKeyInputEnvelope
-  connect?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
+export type logUncheckedCreateNestedManyWithoutApi_keyInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
+  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+  connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
 }
 
-export type LogUpdateManyWithoutApiKeyNestedInput = {
-  create?: Prisma.XOR<Prisma.LogCreateWithoutApiKeyInput, Prisma.LogUncheckedCreateWithoutApiKeyInput> | Prisma.LogCreateWithoutApiKeyInput[] | Prisma.LogUncheckedCreateWithoutApiKeyInput[]
-  connectOrCreate?: Prisma.LogCreateOrConnectWithoutApiKeyInput | Prisma.LogCreateOrConnectWithoutApiKeyInput[]
-  upsert?: Prisma.LogUpsertWithWhereUniqueWithoutApiKeyInput | Prisma.LogUpsertWithWhereUniqueWithoutApiKeyInput[]
-  createMany?: Prisma.LogCreateManyApiKeyInputEnvelope
-  set?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  disconnect?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  delete?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  connect?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  update?: Prisma.LogUpdateWithWhereUniqueWithoutApiKeyInput | Prisma.LogUpdateWithWhereUniqueWithoutApiKeyInput[]
-  updateMany?: Prisma.LogUpdateManyWithWhereWithoutApiKeyInput | Prisma.LogUpdateManyWithWhereWithoutApiKeyInput[]
-  deleteMany?: Prisma.LogScalarWhereInput | Prisma.LogScalarWhereInput[]
+export type logUpdateManyWithoutApi_keyNestedInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
+  upsert?: Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput | Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput[]
+  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+  set?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  disconnect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  delete?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  update?: Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput | Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput[]
+  updateMany?: Prisma.logUpdateManyWithWhereWithoutApi_keyInput | Prisma.logUpdateManyWithWhereWithoutApi_keyInput[]
+  deleteMany?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
 }
 
-export type LogUncheckedUpdateManyWithoutApiKeyNestedInput = {
-  create?: Prisma.XOR<Prisma.LogCreateWithoutApiKeyInput, Prisma.LogUncheckedCreateWithoutApiKeyInput> | Prisma.LogCreateWithoutApiKeyInput[] | Prisma.LogUncheckedCreateWithoutApiKeyInput[]
-  connectOrCreate?: Prisma.LogCreateOrConnectWithoutApiKeyInput | Prisma.LogCreateOrConnectWithoutApiKeyInput[]
-  upsert?: Prisma.LogUpsertWithWhereUniqueWithoutApiKeyInput | Prisma.LogUpsertWithWhereUniqueWithoutApiKeyInput[]
-  createMany?: Prisma.LogCreateManyApiKeyInputEnvelope
-  set?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  disconnect?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  delete?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  connect?: Prisma.LogWhereUniqueInput | Prisma.LogWhereUniqueInput[]
-  update?: Prisma.LogUpdateWithWhereUniqueWithoutApiKeyInput | Prisma.LogUpdateWithWhereUniqueWithoutApiKeyInput[]
-  updateMany?: Prisma.LogUpdateManyWithWhereWithoutApiKeyInput | Prisma.LogUpdateManyWithWhereWithoutApiKeyInput[]
-  deleteMany?: Prisma.LogScalarWhereInput | Prisma.LogScalarWhereInput[]
-}
-
-export type BigIntFieldUpdateOperationsInput = {
-  set?: bigint | number
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
+export type logUncheckedUpdateManyWithoutApi_keyNestedInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
+  upsert?: Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput | Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput[]
+  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+  set?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  disconnect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  delete?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
+  update?: Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput | Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput[]
+  updateMany?: Prisma.logUpdateManyWithWhereWithoutApi_keyInput | Prisma.logUpdateManyWithWhereWithoutApi_keyInput[]
+  deleteMany?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
 }
 
 export type EnumLogLevelFieldUpdateOperationsInput = {
   set?: $Enums.LogLevel
 }
 
-export type LogCreateWithoutApiKeyInput = {
+export type logCreateWithoutApi_keyInput = {
   id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -439,7 +437,7 @@ export type LogCreateWithoutApiKeyInput = {
   timestamp?: Date | string
 }
 
-export type LogUncheckedCreateWithoutApiKeyInput = {
+export type logUncheckedCreateWithoutApi_keyInput = {
   id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -447,45 +445,45 @@ export type LogUncheckedCreateWithoutApiKeyInput = {
   timestamp?: Date | string
 }
 
-export type LogCreateOrConnectWithoutApiKeyInput = {
-  where: Prisma.LogWhereUniqueInput
-  create: Prisma.XOR<Prisma.LogCreateWithoutApiKeyInput, Prisma.LogUncheckedCreateWithoutApiKeyInput>
+export type logCreateOrConnectWithoutApi_keyInput = {
+  where: Prisma.logWhereUniqueInput
+  create: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput>
 }
 
-export type LogCreateManyApiKeyInputEnvelope = {
-  data: Prisma.LogCreateManyApiKeyInput | Prisma.LogCreateManyApiKeyInput[]
+export type logCreateManyApi_keyInputEnvelope = {
+  data: Prisma.logCreateManyApi_keyInput | Prisma.logCreateManyApi_keyInput[]
   skipDuplicates?: boolean
 }
 
-export type LogUpsertWithWhereUniqueWithoutApiKeyInput = {
-  where: Prisma.LogWhereUniqueInput
-  update: Prisma.XOR<Prisma.LogUpdateWithoutApiKeyInput, Prisma.LogUncheckedUpdateWithoutApiKeyInput>
-  create: Prisma.XOR<Prisma.LogCreateWithoutApiKeyInput, Prisma.LogUncheckedCreateWithoutApiKeyInput>
+export type logUpsertWithWhereUniqueWithoutApi_keyInput = {
+  where: Prisma.logWhereUniqueInput
+  update: Prisma.XOR<Prisma.logUpdateWithoutApi_keyInput, Prisma.logUncheckedUpdateWithoutApi_keyInput>
+  create: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput>
 }
 
-export type LogUpdateWithWhereUniqueWithoutApiKeyInput = {
-  where: Prisma.LogWhereUniqueInput
-  data: Prisma.XOR<Prisma.LogUpdateWithoutApiKeyInput, Prisma.LogUncheckedUpdateWithoutApiKeyInput>
+export type logUpdateWithWhereUniqueWithoutApi_keyInput = {
+  where: Prisma.logWhereUniqueInput
+  data: Prisma.XOR<Prisma.logUpdateWithoutApi_keyInput, Prisma.logUncheckedUpdateWithoutApi_keyInput>
 }
 
-export type LogUpdateManyWithWhereWithoutApiKeyInput = {
-  where: Prisma.LogScalarWhereInput
-  data: Prisma.XOR<Prisma.LogUpdateManyMutationInput, Prisma.LogUncheckedUpdateManyWithoutApiKeyInput>
+export type logUpdateManyWithWhereWithoutApi_keyInput = {
+  where: Prisma.logScalarWhereInput
+  data: Prisma.XOR<Prisma.logUpdateManyMutationInput, Prisma.logUncheckedUpdateManyWithoutApi_keyInput>
 }
 
-export type LogScalarWhereInput = {
-  AND?: Prisma.LogScalarWhereInput | Prisma.LogScalarWhereInput[]
-  OR?: Prisma.LogScalarWhereInput[]
-  NOT?: Prisma.LogScalarWhereInput | Prisma.LogScalarWhereInput[]
-  id?: Prisma.BigIntFilter<"Log"> | bigint | number
-  apiKeyId?: Prisma.StringFilter<"Log"> | string
-  message?: Prisma.StringFilter<"Log"> | string
-  metadata?: Prisma.JsonFilter<"Log">
-  level?: Prisma.EnumLogLevelFilter<"Log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFilter<"Log"> | Date | string
+export type logScalarWhereInput = {
+  AND?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
+  OR?: Prisma.logScalarWhereInput[]
+  NOT?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
+  id?: Prisma.BigIntFilter<"log"> | bigint | number
+  api_key_id?: Prisma.BigIntFilter<"log"> | bigint | number
+  message?: Prisma.StringFilter<"log"> | string
+  metadata?: Prisma.JsonFilter<"log">
+  level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
+  timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
 }
 
-export type LogCreateManyApiKeyInput = {
+export type logCreateManyApi_keyInput = {
   id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -493,7 +491,7 @@ export type LogCreateManyApiKeyInput = {
   timestamp?: Date | string
 }
 
-export type LogUpdateWithoutApiKeyInput = {
+export type logUpdateWithoutApi_keyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -501,7 +499,7 @@ export type LogUpdateWithoutApiKeyInput = {
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LogUncheckedUpdateWithoutApiKeyInput = {
+export type logUncheckedUpdateWithoutApi_keyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -509,7 +507,7 @@ export type LogUncheckedUpdateWithoutApiKeyInput = {
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LogUncheckedUpdateManyWithoutApiKeyInput = {
+export type logUncheckedUpdateManyWithoutApi_keyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -519,64 +517,64 @@ export type LogUncheckedUpdateManyWithoutApiKeyInput = {
 
 
 
-export type LogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type logSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  apiKeyId?: boolean
+  api_key_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
-  apiKey?: boolean | Prisma.ApiKeyDefaultArgs<ExtArgs>
+  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
-export type LogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type logSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  apiKeyId?: boolean
+  api_key_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
-  apiKey?: boolean | Prisma.ApiKeyDefaultArgs<ExtArgs>
+  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
-export type LogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type logSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  apiKeyId?: boolean
+  api_key_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
-  apiKey?: boolean | Prisma.ApiKeyDefaultArgs<ExtArgs>
+  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
-export type LogSelectScalar = {
+export type logSelectScalar = {
   id?: boolean
-  apiKeyId?: boolean
+  api_key_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
 }
 
-export type LogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "apiKeyId" | "message" | "metadata" | "level" | "timestamp", ExtArgs["result"]["log"]>
-export type LogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  apiKey?: boolean | Prisma.ApiKeyDefaultArgs<ExtArgs>
+export type logOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "api_key_id" | "message" | "metadata" | "level" | "timestamp", ExtArgs["result"]["log"]>
+export type logInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
 }
-export type LogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  apiKey?: boolean | Prisma.ApiKeyDefaultArgs<ExtArgs>
+export type logIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
 }
-export type LogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  apiKey?: boolean | Prisma.ApiKeyDefaultArgs<ExtArgs>
+export type logIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
 }
 
-export type $LogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  name: "Log"
+export type $logPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  name: "log"
   objects: {
-    apiKey: Prisma.$ApiKeyPayload<ExtArgs>
+    api_key: Prisma.$api_keyPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
-    apiKeyId: string
+    api_key_id: bigint
     message: string
     metadata: runtime.JsonValue
     level: $Enums.LogLevel
@@ -585,18 +583,18 @@ export type $LogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   composites: {}
 }
 
-export type LogGetPayload<S extends boolean | null | undefined | LogDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$LogPayload, S>
+export type logGetPayload<S extends boolean | null | undefined | logDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$logPayload, S>
 
-export type LogCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  Omit<LogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+export type logCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  Omit<logFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
     select?: LogCountAggregateInputType | true
   }
 
-export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Log'], meta: { name: 'Log' } }
+export interface logDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['log'], meta: { name: 'log' } }
   /**
    * Find zero or one Log that matches the filter.
-   * @param {LogFindUniqueArgs} args - Arguments to find a Log
+   * @param {logFindUniqueArgs} args - Arguments to find a Log
    * @example
    * // Get one Log
    * const log = await prisma.log.findUnique({
@@ -605,12 +603,12 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   }
    * })
    */
-  findUnique<T extends LogFindUniqueArgs>(args: Prisma.SelectSubset<T, LogFindUniqueArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findUnique<T extends logFindUniqueArgs>(args: Prisma.SelectSubset<T, logFindUniqueArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find one Log that matches the filter or throw an error with `error.code='P2025'`
    * if no matches were found.
-   * @param {LogFindUniqueOrThrowArgs} args - Arguments to find a Log
+   * @param {logFindUniqueOrThrowArgs} args - Arguments to find a Log
    * @example
    * // Get one Log
    * const log = await prisma.log.findUniqueOrThrow({
@@ -619,13 +617,13 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   }
    * })
    */
-  findUniqueOrThrow<T extends LogFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, LogFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findUniqueOrThrow<T extends logFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, logFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first Log that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {LogFindFirstArgs} args - Arguments to find a Log
+   * @param {logFindFirstArgs} args - Arguments to find a Log
    * @example
    * // Get one Log
    * const log = await prisma.log.findFirst({
@@ -634,14 +632,14 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   }
    * })
    */
-  findFirst<T extends LogFindFirstArgs>(args?: Prisma.SelectSubset<T, LogFindFirstArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findFirst<T extends logFindFirstArgs>(args?: Prisma.SelectSubset<T, logFindFirstArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first Log that matches the filter or
    * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {LogFindFirstOrThrowArgs} args - Arguments to find a Log
+   * @param {logFindFirstOrThrowArgs} args - Arguments to find a Log
    * @example
    * // Get one Log
    * const log = await prisma.log.findFirstOrThrow({
@@ -650,13 +648,13 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   }
    * })
    */
-  findFirstOrThrow<T extends LogFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, LogFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findFirstOrThrow<T extends logFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, logFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find zero or more Logs that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {LogFindManyArgs} args - Arguments to filter and select certain fields only.
+   * @param {logFindManyArgs} args - Arguments to filter and select certain fields only.
    * @example
    * // Get all Logs
    * const logs = await prisma.log.findMany()
@@ -668,11 +666,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * const logWithIdOnly = await prisma.log.findMany({ select: { id: true } })
    * 
    */
-  findMany<T extends LogFindManyArgs>(args?: Prisma.SelectSubset<T, LogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+  findMany<T extends logFindManyArgs>(args?: Prisma.SelectSubset<T, logFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
   /**
    * Create a Log.
-   * @param {LogCreateArgs} args - Arguments to create a Log.
+   * @param {logCreateArgs} args - Arguments to create a Log.
    * @example
    * // Create one Log
    * const Log = await prisma.log.create({
@@ -682,11 +680,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * })
    * 
    */
-  create<T extends LogCreateArgs>(args: Prisma.SelectSubset<T, LogCreateArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  create<T extends logCreateArgs>(args: Prisma.SelectSubset<T, logCreateArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Create many Logs.
-   * @param {LogCreateManyArgs} args - Arguments to create many Logs.
+   * @param {logCreateManyArgs} args - Arguments to create many Logs.
    * @example
    * // Create many Logs
    * const log = await prisma.log.createMany({
@@ -696,11 +694,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * })
    *     
    */
-  createMany<T extends LogCreateManyArgs>(args?: Prisma.SelectSubset<T, LogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  createMany<T extends logCreateManyArgs>(args?: Prisma.SelectSubset<T, logCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Create many Logs and returns the data saved in the database.
-   * @param {LogCreateManyAndReturnArgs} args - Arguments to create many Logs.
+   * @param {logCreateManyAndReturnArgs} args - Arguments to create many Logs.
    * @example
    * // Create many Logs
    * const log = await prisma.log.createManyAndReturn({
@@ -720,11 +718,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  createManyAndReturn<T extends LogCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, LogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+  createManyAndReturn<T extends logCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, logCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Delete a Log.
-   * @param {LogDeleteArgs} args - Arguments to delete one Log.
+   * @param {logDeleteArgs} args - Arguments to delete one Log.
    * @example
    * // Delete one Log
    * const Log = await prisma.log.delete({
@@ -734,11 +732,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * })
    * 
    */
-  delete<T extends LogDeleteArgs>(args: Prisma.SelectSubset<T, LogDeleteArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  delete<T extends logDeleteArgs>(args: Prisma.SelectSubset<T, logDeleteArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Update one Log.
-   * @param {LogUpdateArgs} args - Arguments to update one Log.
+   * @param {logUpdateArgs} args - Arguments to update one Log.
    * @example
    * // Update one Log
    * const log = await prisma.log.update({
@@ -751,11 +749,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * })
    * 
    */
-  update<T extends LogUpdateArgs>(args: Prisma.SelectSubset<T, LogUpdateArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  update<T extends logUpdateArgs>(args: Prisma.SelectSubset<T, logUpdateArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Delete zero or more Logs.
-   * @param {LogDeleteManyArgs} args - Arguments to filter Logs to delete.
+   * @param {logDeleteManyArgs} args - Arguments to filter Logs to delete.
    * @example
    * // Delete a few Logs
    * const { count } = await prisma.log.deleteMany({
@@ -765,13 +763,13 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * })
    * 
    */
-  deleteMany<T extends LogDeleteManyArgs>(args?: Prisma.SelectSubset<T, LogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  deleteMany<T extends logDeleteManyArgs>(args?: Prisma.SelectSubset<T, logDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more Logs.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {LogUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {logUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
    * // Update many Logs
    * const log = await prisma.log.updateMany({
@@ -784,11 +782,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * })
    * 
    */
-  updateMany<T extends LogUpdateManyArgs>(args: Prisma.SelectSubset<T, LogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  updateMany<T extends logUpdateManyArgs>(args: Prisma.SelectSubset<T, logUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more Logs and returns the data updated in the database.
-   * @param {LogUpdateManyAndReturnArgs} args - Arguments to update many Logs.
+   * @param {logUpdateManyAndReturnArgs} args - Arguments to update many Logs.
    * @example
    * // Update many Logs
    * const log = await prisma.log.updateManyAndReturn({
@@ -814,11 +812,11 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  updateManyAndReturn<T extends LogUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, LogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+  updateManyAndReturn<T extends logUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, logUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Log.
-   * @param {LogUpsertArgs} args - Arguments to update or create a Log.
+   * @param {logUpsertArgs} args - Arguments to update or create a Log.
    * @example
    * // Update or create a Log
    * const log = await prisma.log.upsert({
@@ -833,14 +831,14 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   }
    * })
    */
-  upsert<T extends LogUpsertArgs>(args: Prisma.SelectSubset<T, LogUpsertArgs<ExtArgs>>): Prisma.Prisma__LogClient<runtime.Types.Result.GetResult<Prisma.$LogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  upsert<T extends logUpsertArgs>(args: Prisma.SelectSubset<T, logUpsertArgs<ExtArgs>>): Prisma.Prisma__logClient<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
   /**
    * Count the number of Logs.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {LogCountArgs} args - Arguments to filter Logs to count.
+   * @param {logCountArgs} args - Arguments to filter Logs to count.
    * @example
    * // Count the number of Logs
    * const count = await prisma.log.count({
@@ -849,8 +847,8 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    *   }
    * })
   **/
-  count<T extends LogCountArgs>(
-    args?: Prisma.Subset<T, LogCountArgs>,
+  count<T extends logCountArgs>(
+    args?: Prisma.Subset<T, logCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
@@ -889,7 +887,7 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Group by Log.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {LogGroupByArgs} args - Group by arguments.
+   * @param {logGroupByArgs} args - Group by arguments.
    * @example
    * // Group by city, order by createdAt, get count
    * const result = await prisma.user.groupBy({
@@ -904,14 +902,14 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
    * 
   **/
   groupBy<
-    T extends LogGroupByArgs,
+    T extends logGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: LogGroupByArgs['orderBy'] }
-      : { orderBy?: LogGroupByArgs['orderBy'] },
+      ? { orderBy: logGroupByArgs['orderBy'] }
+      : { orderBy?: logGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -960,22 +958,22 @@ export interface LogDelegate<ExtArgs extends runtime.Types.Extensions.InternalAr
           ? never
           : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
       }[OrderFields]
-  >(args: Prisma.SubsetIntersection<T, LogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  >(args: Prisma.SubsetIntersection<T, logGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 /**
- * Fields of the Log model
+ * Fields of the log model
  */
-readonly fields: LogFieldRefs;
+readonly fields: logFieldRefs;
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for Log.
+ * The delegate class that acts as a "Promise-like" for log.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export interface Prisma__LogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+export interface Prisma__logClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  apiKey<T extends Prisma.ApiKeyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ApiKeyDefaultArgs<ExtArgs>>): Prisma.Prisma__ApiKeyClient<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  api_key<T extends Prisma.api_keyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.api_keyDefaultArgs<ExtArgs>>): Prisma.Prisma__api_keyClient<runtime.Types.Result.GetResult<Prisma.$api_keyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1002,424 +1000,424 @@ export interface Prisma__LogClient<T, Null = never, ExtArgs extends runtime.Type
 
 
 /**
- * Fields of the Log model
+ * Fields of the log model
  */
-export interface LogFieldRefs {
-  readonly id: Prisma.FieldRef<"Log", 'BigInt'>
-  readonly apiKeyId: Prisma.FieldRef<"Log", 'String'>
-  readonly message: Prisma.FieldRef<"Log", 'String'>
-  readonly metadata: Prisma.FieldRef<"Log", 'Json'>
-  readonly level: Prisma.FieldRef<"Log", 'LogLevel'>
-  readonly timestamp: Prisma.FieldRef<"Log", 'DateTime'>
+export interface logFieldRefs {
+  readonly id: Prisma.FieldRef<"log", 'BigInt'>
+  readonly api_key_id: Prisma.FieldRef<"log", 'BigInt'>
+  readonly message: Prisma.FieldRef<"log", 'String'>
+  readonly metadata: Prisma.FieldRef<"log", 'Json'>
+  readonly level: Prisma.FieldRef<"log", 'LogLevel'>
+  readonly timestamp: Prisma.FieldRef<"log", 'DateTime'>
 }
     
 
 // Custom InputTypes
 /**
- * Log findUnique
+ * log findUnique
  */
-export type LogFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * Filter, which Log to fetch.
+   * Filter, which log to fetch.
    */
-  where: Prisma.LogWhereUniqueInput
+  where: Prisma.logWhereUniqueInput
 }
 
 /**
- * Log findUniqueOrThrow
+ * log findUniqueOrThrow
  */
-export type LogFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * Filter, which Log to fetch.
+   * Filter, which log to fetch.
    */
-  where: Prisma.LogWhereUniqueInput
+  where: Prisma.logWhereUniqueInput
 }
 
 /**
- * Log findFirst
+ * log findFirst
  */
-export type LogFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * Filter, which Log to fetch.
+   * Filter, which log to fetch.
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Logs to fetch.
+   * Determine the order of logs to fetch.
    */
-  orderBy?: Prisma.LogOrderByWithRelationInput | Prisma.LogOrderByWithRelationInput[]
+  orderBy?: Prisma.logOrderByWithRelationInput | Prisma.logOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for Logs.
+   * Sets the position for searching for logs.
    */
-  cursor?: Prisma.LogWhereUniqueInput
+  cursor?: Prisma.logWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Logs from the position of the cursor.
+   * Take `±n` logs from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Logs.
+   * Skip the first `n` logs.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Logs.
+   * Filter by unique combinations of logs.
    */
   distinct?: Prisma.LogScalarFieldEnum | Prisma.LogScalarFieldEnum[]
 }
 
 /**
- * Log findFirstOrThrow
+ * log findFirstOrThrow
  */
-export type LogFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * Filter, which Log to fetch.
+   * Filter, which log to fetch.
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Logs to fetch.
+   * Determine the order of logs to fetch.
    */
-  orderBy?: Prisma.LogOrderByWithRelationInput | Prisma.LogOrderByWithRelationInput[]
+  orderBy?: Prisma.logOrderByWithRelationInput | Prisma.logOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for Logs.
+   * Sets the position for searching for logs.
    */
-  cursor?: Prisma.LogWhereUniqueInput
+  cursor?: Prisma.logWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Logs from the position of the cursor.
+   * Take `±n` logs from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Logs.
+   * Skip the first `n` logs.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Logs.
+   * Filter by unique combinations of logs.
    */
   distinct?: Prisma.LogScalarFieldEnum | Prisma.LogScalarFieldEnum[]
 }
 
 /**
- * Log findMany
+ * log findMany
  */
-export type LogFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * Filter, which Logs to fetch.
+   * Filter, which logs to fetch.
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Logs to fetch.
+   * Determine the order of logs to fetch.
    */
-  orderBy?: Prisma.LogOrderByWithRelationInput | Prisma.LogOrderByWithRelationInput[]
+  orderBy?: Prisma.logOrderByWithRelationInput | Prisma.logOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for listing Logs.
+   * Sets the position for listing logs.
    */
-  cursor?: Prisma.LogWhereUniqueInput
+  cursor?: Prisma.logWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Logs from the position of the cursor.
+   * Take `±n` logs from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Logs.
+   * Skip the first `n` logs.
    */
   skip?: number
   distinct?: Prisma.LogScalarFieldEnum | Prisma.LogScalarFieldEnum[]
 }
 
 /**
- * Log create
+ * log create
  */
-export type LogCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * The data needed to create a Log.
+   * The data needed to create a log.
    */
-  data: Prisma.XOR<Prisma.LogCreateInput, Prisma.LogUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.logCreateInput, Prisma.logUncheckedCreateInput>
 }
 
 /**
- * Log createMany
+ * log createMany
  */
-export type LogCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to create many Logs.
+   * The data used to create many logs.
    */
-  data: Prisma.LogCreateManyInput | Prisma.LogCreateManyInput[]
+  data: Prisma.logCreateManyInput | Prisma.logCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * Log createManyAndReturn
+ * log createManyAndReturn
  */
-export type LogCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.logSelectCreateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
-   * The data used to create many Logs.
+   * The data used to create many logs.
    */
-  data: Prisma.LogCreateManyInput | Prisma.LogCreateManyInput[]
+  data: Prisma.logCreateManyInput | Prisma.logCreateManyInput[]
   skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogIncludeCreateManyAndReturn<ExtArgs> | null
+  include?: Prisma.logIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
- * Log update
+ * log update
  */
-export type LogUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * The data needed to update a Log.
+   * The data needed to update a log.
    */
-  data: Prisma.XOR<Prisma.LogUpdateInput, Prisma.LogUncheckedUpdateInput>
+  data: Prisma.XOR<Prisma.logUpdateInput, Prisma.logUncheckedUpdateInput>
   /**
-   * Choose, which Log to update.
+   * Choose, which log to update.
    */
-  where: Prisma.LogWhereUniqueInput
+  where: Prisma.logWhereUniqueInput
 }
 
 /**
- * Log updateMany
+ * log updateMany
  */
-export type LogUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to update Logs.
+   * The data used to update logs.
    */
-  data: Prisma.XOR<Prisma.LogUpdateManyMutationInput, Prisma.LogUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.logUpdateManyMutationInput, Prisma.logUncheckedUpdateManyInput>
   /**
-   * Filter which Logs to update
+   * Filter which logs to update
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
-   * Limit how many Logs to update.
+   * Limit how many logs to update.
    */
   limit?: number
 }
 
 /**
- * Log updateManyAndReturn
+ * log updateManyAndReturn
  */
-export type LogUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.logSelectUpdateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
-   * The data used to update Logs.
+   * The data used to update logs.
    */
-  data: Prisma.XOR<Prisma.LogUpdateManyMutationInput, Prisma.LogUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.logUpdateManyMutationInput, Prisma.logUncheckedUpdateManyInput>
   /**
-   * Filter which Logs to update
+   * Filter which logs to update
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
-   * Limit how many Logs to update.
+   * Limit how many logs to update.
    */
   limit?: number
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogIncludeUpdateManyAndReturn<ExtArgs> | null
+  include?: Prisma.logIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
- * Log upsert
+ * log upsert
  */
-export type LogUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * The filter to search for the Log to update in case it exists.
+   * The filter to search for the log to update in case it exists.
    */
-  where: Prisma.LogWhereUniqueInput
+  where: Prisma.logWhereUniqueInput
   /**
-   * In case the Log found by the `where` argument doesn't exist, create a new Log with this data.
+   * In case the log found by the `where` argument doesn't exist, create a new log with this data.
    */
-  create: Prisma.XOR<Prisma.LogCreateInput, Prisma.LogUncheckedCreateInput>
+  create: Prisma.XOR<Prisma.logCreateInput, Prisma.logUncheckedCreateInput>
   /**
-   * In case the Log was found with the provided `where` argument, update it with this data.
+   * In case the log was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<Prisma.LogUpdateInput, Prisma.LogUncheckedUpdateInput>
+  update: Prisma.XOR<Prisma.logUpdateInput, Prisma.logUncheckedUpdateInput>
 }
 
 /**
- * Log delete
+ * log delete
  */
-export type LogDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
   /**
-   * Filter which Log to delete.
+   * Filter which log to delete.
    */
-  where: Prisma.LogWhereUniqueInput
+  where: Prisma.logWhereUniqueInput
 }
 
 /**
- * Log deleteMany
+ * log deleteMany
  */
-export type LogDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which Logs to delete
+   * Filter which logs to delete
    */
-  where?: Prisma.LogWhereInput
+  where?: Prisma.logWhereInput
   /**
-   * Limit how many Logs to delete.
+   * Limit how many logs to delete.
    */
   limit?: number
 }
 
 /**
- * Log without action
+ * log without action
  */
-export type LogDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type logDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Log
+   * Select specific fields to fetch from the log
    */
-  select?: Prisma.LogSelect<ExtArgs> | null
+  select?: Prisma.logSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Log
+   * Omit specific fields from the log
    */
-  omit?: Prisma.LogOmit<ExtArgs> | null
+  omit?: Prisma.logOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.LogInclude<ExtArgs> | null
+  include?: Prisma.logInclude<ExtArgs> | null
 }

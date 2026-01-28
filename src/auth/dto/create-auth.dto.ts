@@ -3,7 +3,7 @@ import { IsEmail, IsString } from "class-validator";
 export class CreateAuthDto {
     @IsEmail()
     email: string;
-    
+
     @IsString()
     name: string;
 
@@ -11,10 +11,15 @@ export class CreateAuthDto {
     password: string;
 }
 
-export class SignInDto{
+export class SignInDto {
     @IsEmail()
-    email:string;
-    
+    email: string;
+
     @IsString()
-    password:string;
+    password: string;
+}
+
+export class RefreshTokenDto {
+    @IsString()
+    refresh_token: string
 }

@@ -10,15 +10,15 @@ import { SessionRepository } from './repositories/session.repository';
   controllers: [UserController],
   providers: [
     UserService,
-    {
-      provide: USER_REPOSITORY,
-      useClass: UserRepository
-    },
-    {
-      provide: SESSION_REPOSITORY,
-      useClass: SessionRepository
-    }
+    // {
+    //   provide: USER_REPOSITORY,
+    //   useClass: UserRepository
+    // },
+    // {
+    //   provide: SESSION_REPOSITORY,
+    //   useClass: SessionRepository
+    // }
   ],
-  exports: [USER_REPOSITORY,SESSION_REPOSITORY]
+  // exports: [USER_REPOSITORY,SESSION_REPOSITORY]
 })
 export class UserModule { }

@@ -12,7 +12,7 @@ export class UserRepository implements IUserRepository {
         return this.prisma.user.create({ data });
     }
 
-    async findById(id: bigint): Promise<user | null> {
+    async findById(id: number): Promise<user | null> {
         return this.prisma.user.findUnique({
             where: { id },
         });
@@ -28,6 +28,12 @@ export class UserRepository implements IUserRepository {
         return this.prisma.user.findUnique({
             where: { id },
             include: { projects: true },
+        });
+    }
+    async findByIdWithSelection(id: number, selection: any): Promise<Partial<user> | null> {
+        return this.prisma.user.findUnique({
+            where: { id },
+            select: selection
         });
     }
 }

@@ -22,7 +22,7 @@ enum LogLevel {
 }
 
 model user {
-  id        BigInt    @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   email     String    @unique
   name      String?
   password  String
@@ -32,19 +32,19 @@ model user {
 }
 
 model project {
-  id          BigInt    @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   description String?
-  user_id     BigInt
+  user_id     Int
   user        user      @relation(fields: [user_id], references: [id])
   timestamp   DateTime  @default(now())
   api_keys    api_key[]
 }
 
 model api_key {
-  id         BigInt   @id @default(autoincrement())
+  id         Int   @id @default(autoincrement())
   key        String   @unique // This is the actual string used in headers
-  project_id BigInt
+  project_id Int
   project    project  @relation(fields: [project_id], references: [id])
   status     Int      @default(0) // 0 = active, 1 = revoked
   timestamp  DateTime @default(now())
@@ -52,9 +52,9 @@ model api_key {
 }
 
 model log {
-  // Use BigInt for massive scale performance
-  id         BigInt   @id @default(autoincrement())
-  api_key_id BigInt
+  // Use Int for massive scale performance
+  id         Int   @id @default(autoincrement())
+  api_key_id Int
   api_key    api_key  @relation(fields: [api_key_id], references: [id])
   message    String
   metadata   Json // Perfect for your 'JSONB' storage
@@ -66,8 +66,8 @@ model log {
 }
 
 model session {
-  id         BigInt   @id @default(autoincrement())
-  user_id    BigInt
+  id         Int   @id @default(autoincrement())
+  user_id    Int
   user       user     @relation(fields: [user_id], references: [id])
   session_id String
   timestamp  DateTime @default(now())

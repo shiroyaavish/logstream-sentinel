@@ -32,21 +32,21 @@ export type LogAvgAggregateOutputType = {
 }
 
 export type LogSumAggregateOutputType = {
-  id: bigint | null
-  api_key_id: bigint | null
+  id: number | null
+  api_key_id: number | null
 }
 
 export type LogMinAggregateOutputType = {
-  id: bigint | null
-  api_key_id: bigint | null
+  id: number | null
+  api_key_id: number | null
   message: string | null
   level: $Enums.LogLevel | null
   timestamp: Date | null
 }
 
 export type LogMaxAggregateOutputType = {
-  id: bigint | null
-  api_key_id: bigint | null
+  id: number | null
+  api_key_id: number | null
   message: string | null
   level: $Enums.LogLevel | null
   timestamp: Date | null
@@ -186,8 +186,8 @@ export type logGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 export type LogGroupByOutputType = {
-  id: bigint
-  api_key_id: bigint
+  id: number
+  api_key_id: number
   message: string
   metadata: runtime.JsonValue
   level: $Enums.LogLevel
@@ -218,8 +218,8 @@ export type logWhereInput = {
   AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
   OR?: Prisma.logWhereInput[]
   NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
-  id?: Prisma.BigIntFilter<"log"> | bigint | number
-  api_key_id?: Prisma.BigIntFilter<"log"> | bigint | number
+  id?: Prisma.IntFilter<"log"> | number
+  api_key_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
@@ -238,11 +238,11 @@ export type logOrderByWithRelationInput = {
 }
 
 export type logWhereUniqueInput = Prisma.AtLeast<{
-  id?: bigint | number
+  id?: number
   AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
   OR?: Prisma.logWhereInput[]
   NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
-  api_key_id?: Prisma.BigIntFilter<"log"> | bigint | number
+  api_key_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
@@ -268,8 +268,8 @@ export type logScalarWhereWithAggregatesInput = {
   AND?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
   OR?: Prisma.logScalarWhereWithAggregatesInput[]
   NOT?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
-  id?: Prisma.BigIntWithAggregatesFilter<"log"> | bigint | number
-  api_key_id?: Prisma.BigIntWithAggregatesFilter<"log"> | bigint | number
+  id?: Prisma.IntWithAggregatesFilter<"log"> | number
+  api_key_id?: Prisma.IntWithAggregatesFilter<"log"> | number
   message?: Prisma.StringWithAggregatesFilter<"log"> | string
   metadata?: Prisma.JsonWithAggregatesFilter<"log">
   level?: Prisma.EnumLogLevelWithAggregatesFilter<"log"> | $Enums.LogLevel
@@ -277,7 +277,6 @@ export type logScalarWhereWithAggregatesInput = {
 }
 
 export type logCreateInput = {
-  id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -286,8 +285,8 @@ export type logCreateInput = {
 }
 
 export type logUncheckedCreateInput = {
-  id?: bigint | number
-  api_key_id: bigint | number
+  id?: number
+  api_key_id: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -295,7 +294,6 @@ export type logUncheckedCreateInput = {
 }
 
 export type logUpdateInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -304,8 +302,8 @@ export type logUpdateInput = {
 }
 
 export type logUncheckedUpdateInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  api_key_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  api_key_id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -313,8 +311,8 @@ export type logUncheckedUpdateInput = {
 }
 
 export type logCreateManyInput = {
-  id?: bigint | number
-  api_key_id: bigint | number
+  id?: number
+  api_key_id: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -322,7 +320,6 @@ export type logCreateManyInput = {
 }
 
 export type logUpdateManyMutationInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -330,8 +327,8 @@ export type logUpdateManyMutationInput = {
 }
 
 export type logUncheckedUpdateManyInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
-  api_key_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  api_key_id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -430,7 +427,6 @@ export type EnumLogLevelFieldUpdateOperationsInput = {
 }
 
 export type logCreateWithoutApi_keyInput = {
-  id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -438,7 +434,7 @@ export type logCreateWithoutApi_keyInput = {
 }
 
 export type logUncheckedCreateWithoutApi_keyInput = {
-  id?: bigint | number
+  id?: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -475,8 +471,8 @@ export type logScalarWhereInput = {
   AND?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
   OR?: Prisma.logScalarWhereInput[]
   NOT?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
-  id?: Prisma.BigIntFilter<"log"> | bigint | number
-  api_key_id?: Prisma.BigIntFilter<"log"> | bigint | number
+  id?: Prisma.IntFilter<"log"> | number
+  api_key_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
@@ -484,7 +480,7 @@ export type logScalarWhereInput = {
 }
 
 export type logCreateManyApi_keyInput = {
-  id?: bigint | number
+  id?: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -492,7 +488,6 @@ export type logCreateManyApi_keyInput = {
 }
 
 export type logUpdateWithoutApi_keyInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -500,7 +495,7 @@ export type logUpdateWithoutApi_keyInput = {
 }
 
 export type logUncheckedUpdateWithoutApi_keyInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -508,7 +503,7 @@ export type logUncheckedUpdateWithoutApi_keyInput = {
 }
 
 export type logUncheckedUpdateManyWithoutApi_keyInput = {
-  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -573,8 +568,8 @@ export type $logPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     api_key: Prisma.$api_keyPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: bigint
-    api_key_id: bigint
+    id: number
+    api_key_id: number
     message: string
     metadata: runtime.JsonValue
     level: $Enums.LogLevel
@@ -1003,8 +998,8 @@ export interface Prisma__logClient<T, Null = never, ExtArgs extends runtime.Type
  * Fields of the log model
  */
 export interface logFieldRefs {
-  readonly id: Prisma.FieldRef<"log", 'BigInt'>
-  readonly api_key_id: Prisma.FieldRef<"log", 'BigInt'>
+  readonly id: Prisma.FieldRef<"log", 'Int'>
+  readonly api_key_id: Prisma.FieldRef<"log", 'Int'>
   readonly message: Prisma.FieldRef<"log", 'String'>
   readonly metadata: Prisma.FieldRef<"log", 'Json'>
   readonly level: Prisma.FieldRef<"log", 'LogLevel'>

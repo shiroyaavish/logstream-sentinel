@@ -8,29 +8,33 @@ import { generate } from 'rxjs';
 import { request } from 'node:http';
 
 @Controller('project')
+@UseGuards(JwtAuthGuard)
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) { }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   create(@Req() request: Request, @Body() createProjectDto: CreateProjectDto) {
     return this.projectService.create(request, createProjectDto);
   }
 
-  @Post()
-  @UseGuards(JwtAuthGuard)
+  @Post("generate-api-key")
   async generateApiKey(@Req() request: Request, @Body() generateApiKeyDto: GenerateApiKeyDto) {
     return this.projectService.generateApiKey(request, generateApiKeyDto)
   }
 
   @Get()
-  findAll(@Req() request: Request,@Query() findAllProjectsDto:FindAllProjectsDto) {
-    return this.projectService.findAll(request,findAllProjectsDto);
+  findAll(@Req() request: Request, @Query() findAllProjectsDto: FindAllProjectsDto) {
+    return this.projectService.findAll(request, findAllProjectsDto);
+  }
+
+  @Patch("api-key/:id/active-inactive")
+  activeInactiveApiKey(@Req() request: Request, @Param("id") id: number) {
+    return this.projectService.activeInactiveApiKey(request, +id)
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectService.findOne(+id);
+  findOne(@Req() request: Request, @Param('id') id: string) {
+    return this.projectService.findOne(request, +id);
   }
 
   @Patch(':id')

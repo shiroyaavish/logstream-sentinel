@@ -59,16 +59,16 @@ export class AuthService {
         sid: sessionData.session_id
       }
 
-      const accessToken = this.jwtService.sign(payload, { secret: this.configService.get<string>('ACCESS_JWT_SEC'), expiresIn: '1h' });
-      const refreshToken = this.jwtService.sign(payload, { secret: this.configService.get<string>('REFRESH_JWT_SEC'), expiresIn: '7d' });
+      const access_token = this.jwtService.sign(payload, { secret: this.configService.get<string>('ACCESS_JWT_SEC'), expiresIn: '1h' });
+      const refresh_token = this.jwtService.sign(payload, { secret: this.configService.get<string>('REFRESH_JWT_SEC'), expiresIn: '7d' });
 
       const user = {
         email: emailExists.email,
         name: emailExists.name,
         id: Number(emailExists.id),
         timestamp: emailExists.timestamp,
-        accessToken,
-        refreshToken
+        access_token: access_token,
+        refresh_token: refresh_token
       }
 
       return {
@@ -102,8 +102,8 @@ export class AuthService {
       return {
         message: "Token refreshed successfully",
         data: {
-          accessToken,
-          refreshToken
+          access_token: accessToken,
+          refresh_token: refreshToken
         }
       }
     } catch (error) {

@@ -25,6 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             this.logger.log(`JWT Payload :: ${JSON.stringify(payload)}`);
             const session = await this.sessionRepository.findBySessionId(payload.sid);
             if (!session) {
+                console.log('Session not found for sid :: ', payload.sid);
                 throw new HttpException({
                     status: HttpStatus.UNAUTHORIZED,
                     message: "session not found",

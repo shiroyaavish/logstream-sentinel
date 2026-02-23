@@ -1,4 +1,4 @@
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { CreateProjectDto, FindAllProjectsDto, GenerateApiKeyDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { Request } from 'express';
@@ -11,6 +11,7 @@ import { ApiKeyRepository } from './repositories/apiKey.repository';
 
 @Injectable()
 export class ProjectService {
+  private readonly logger = new Logger(ProjectService.name);
   constructor(
     @Inject(PROJECT_REPOSITORY) private readonly projectRepository: ProjectRepository,
     @Inject(API_KEY_REPOSITORY) private readonly apiKeyRepository: ApiKeyRepository
@@ -32,7 +33,12 @@ export class ProjectService {
       }
 
     } catch (error) {
-      throw error
+      this.logger.error('Error creating project :: ', error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "An error occurred while creating project",
+        data: {}
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 
@@ -42,11 +48,22 @@ export class ProjectService {
       const user = request.user
       const projectExists = await this.projectRepository.findById(project_id, user["id"])
       if (!projectExists) {
-        return {
+        throw new HttpException({
+          status: HttpStatus.NOT_FOUND,
           message: "Project not found",
           data: {}
-        }
+        }, HttpStatus.NOT_FOUND)
       }
+
+      const existingApiKey = await this.apiKeyRepository.findByProjectId(project_id, user["id"])
+      if (existingApiKey) {
+        throw new HttpException({
+          status: HttpStatus.CONFLICT,
+          message: "API Key already exists for this project",
+          data: {}
+        }, HttpStatus.CONFLICT)
+      }
+
       const apiKey = crypto.randomUUID()
       const apiKeyData: CreateApiKey = {
         key: apiKey,
@@ -62,7 +79,12 @@ export class ProjectService {
       }
 
     } catch (error) {
-      throw error
+      this.logger.error('Error generating API Key :: ', error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "An error occurred while generating API Key",
+        data: {}
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 
@@ -81,7 +103,7 @@ export class ProjectService {
           mode: "insensitive"
         }
       }
-      const data = await this.projectRepository.findAll(query, offset, limit)
+      const data = await this.projectRepository.findAll(query, Number(offset) || 0, Number(limit) || 15)
       const totalRecord = await this.projectRepository.countDocuments(query)
 
       return {
@@ -94,13 +116,49 @@ export class ProjectService {
       }
 
     } catch (error) {
-      console.error(error)
-      throw error
+      this.logger.error('Error Find all projects:: ', error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "An error occurred while finding all projects",
+        data: {}
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  async findOne(request: Request, id: number) {
+    try {
+      const userId = request.user?.["id"]
+
+      const projectDetails = await this.projectRepository.findById(id, userId)
+      if (!projectDetails) {
+        throw new HttpException({
+          status: HttpStatus.NOT_FOUND,
+          message: "Project not found",
+          data: {}
+        }, HttpStatus.NOT_FOUND)
+      }
+
+      const apiKeyDetails = await this.apiKeyRepository.findByProjectId(projectDetails.id, userId)
+
+      const data = {
+        ...projectDetails, api_key_exists: apiKeyDetails?.key ? true : false,
+        api_key_active: apiKeyDetails?.status === 0 ? true : false
+      }
+
+      return {
+        status: HttpStatus.OK,
+        message: "Project details fetched successfully",
+        data
+      }
+
+    } catch (error) {
+      console.error('Error finding project :: ', error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "An error occurred while finding project",
+        data: {}
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
   }
 
   async update(request: Request, id: number, updateProjectDto: UpdateProjectDto) {
@@ -109,10 +167,11 @@ export class ProjectService {
       const { name, description } = updateProjectDto
       const projectExists = await this.projectRepository.findById(id, user["id"])
       if (!projectExists) {
-        return {
+        throw new HttpException({
+          status: HttpStatus.NOT_FOUND,
           message: "Project not found",
           data: {}
-        }
+        }, HttpStatus.NOT_FOUND)
       }
       const projectData: CreateProjectInput = {
         name: name || projectExists.name,
@@ -128,7 +187,41 @@ export class ProjectService {
       }
 
     } catch (error) {
-      throw error
+      this.logger.error('Error updating project :: ', error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "An error occurred while updating project",
+        data: {}
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
+  async activeInactiveApiKey(request: Request, id: number) {
+    try {
+      const user = request.user
+      const apiKeyDetails = await this.apiKeyRepository.findById(id, user["id"])
+      if (!apiKeyDetails) {
+        throw new HttpException({
+          status: HttpStatus.NOT_FOUND,
+          message: "API Key not found",
+          data: {}
+        }, HttpStatus.NOT_FOUND)
+      }
+
+      const updatedStatus = apiKeyDetails.status === 1 ? 0 : 1
+      await this.apiKeyRepository.updateStatus(id, updatedStatus)
+
+      return {
+        message: `API Key ${updatedStatus === 0 ? "activated" : "deactivated"} successfully`
+      }
+
+    } catch (error) {
+      console.error('Error active inactive API Key :: ', error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "An error occurred while active inactive API Key",
+        data: {}
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 

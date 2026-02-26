@@ -1,4 +1,6 @@
 import { Global, Module } from '@nestjs/common';
+import { LOG_REPOSITORY } from 'src/logs/interface/log.interface';
+import { LogRepository } from 'src/logs/repositories/log.repository';
 import { API_KEY_REPOSITORY } from 'src/project/interface/apiKey.interface';
 import { ApiKeyRepository } from 'src/project/repositories/apiKey.repository';
 import { PROJECT_REPOSITORY, ProjectRepository } from 'src/project/repositories/project.repository';
@@ -25,8 +27,12 @@ import { UserRepository } from 'src/user/repositories/user.repository';
         {
             provide: API_KEY_REPOSITORY,
             useClass: ApiKeyRepository
+        },
+        {
+            provide: LOG_REPOSITORY,
+            useClass: LogRepository
         }
     ],
-    exports: [PROJECT_REPOSITORY, USER_REPOSITORY, SESSION_REPOSITORY, API_KEY_REPOSITORY]
+    exports: [PROJECT_REPOSITORY, USER_REPOSITORY, SESSION_REPOSITORY, API_KEY_REPOSITORY, LOG_REPOSITORY]
 })
 export class SharedModule { }

@@ -46,7 +46,7 @@ export class ProjectService {
     try {
       const { project_id } = generateApiKeyDto
       const user = request.user
-      const projectExists = await this.projectRepository.findById(project_id, user["id"])
+      const projectExists = await this.projectRepository.findById(project_id)
       if (!projectExists) {
         throw new HttpException({
           status: HttpStatus.NOT_FOUND,
@@ -125,7 +125,7 @@ export class ProjectService {
     try {
       const userId = request.user?.["id"]
 
-      const projectDetails = await this.projectRepository.findById(id, userId)
+      const projectDetails = await this.projectRepository.findById(id)
       if (!projectDetails) {
         throw new HttpException({
           status: HttpStatus.NOT_FOUND,
@@ -162,7 +162,7 @@ export class ProjectService {
     try {
       const user = request.user
       const { name, description } = updateProjectDto
-      const projectExists = await this.projectRepository.findById(id, user["id"])
+      const projectExists = await this.projectRepository.findById(id)
       if (!projectExists) {
         throw new HttpException({
           status: HttpStatus.NOT_FOUND,

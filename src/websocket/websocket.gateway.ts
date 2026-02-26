@@ -24,7 +24,7 @@ export class WebsocketGateway {
     client.join(userId)
 
     client.emit("setConnected", { message: "connected" })
-    
+
     console.log(`User Connected :: ${userId}`)
   }
 
@@ -34,31 +34,7 @@ export class WebsocketGateway {
   }
 
   sendToUser(userId: string, event: string, data: any) {
+    this.server.removeAllListeners(event)
     this.server.to(userId).emit(event, data);
-  }
-
-  @SubscribeMessage('createWebsocket')
-  create(@MessageBody() createWebsocketDto: CreateWebsocketDto) {
-    return this.websocketService.create(createWebsocketDto);
-  }
-
-  @SubscribeMessage('findAllWebsocket')
-  findAll() {
-    return this.websocketService.findAll();
-  }
-
-  @SubscribeMessage('findOneWebsocket')
-  findOne(@MessageBody() id: number) {
-    return this.websocketService.findOne(id);
-  }
-
-  @SubscribeMessage('updateWebsocket')
-  update(@MessageBody() updateWebsocketDto: UpdateWebsocketDto) {
-    return this.websocketService.update(updateWebsocketDto.id, updateWebsocketDto);
-  }
-
-  @SubscribeMessage('removeWebsocket')
-  remove(@MessageBody() id: number) {
-    return this.websocketService.remove(id);
   }
 }

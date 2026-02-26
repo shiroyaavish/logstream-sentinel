@@ -225,7 +225,6 @@ export type api_keyWhereInput = {
   status?: Prisma.IntFilter<"api_key"> | number
   timestamp?: Prisma.DateTimeFilter<"api_key"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
-  logs?: Prisma.LogListRelationFilter
 }
 
 export type api_keyOrderByWithRelationInput = {
@@ -235,7 +234,6 @@ export type api_keyOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
   project?: Prisma.projectOrderByWithRelationInput
-  logs?: Prisma.logOrderByRelationAggregateInput
 }
 
 export type api_keyWhereUniqueInput = Prisma.AtLeast<{
@@ -248,7 +246,6 @@ export type api_keyWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.IntFilter<"api_key"> | number
   timestamp?: Prisma.DateTimeFilter<"api_key"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
-  logs?: Prisma.LogListRelationFilter
 }, "id" | "key">
 
 export type api_keyOrderByWithAggregationInput = {
@@ -280,7 +277,6 @@ export type api_keyCreateInput = {
   status?: number
   timestamp?: Date | string
   project: Prisma.projectCreateNestedOneWithoutApi_keysInput
-  logs?: Prisma.logCreateNestedManyWithoutApi_keyInput
 }
 
 export type api_keyUncheckedCreateInput = {
@@ -289,7 +285,6 @@ export type api_keyUncheckedCreateInput = {
   project_id: number
   status?: number
   timestamp?: Date | string
-  logs?: Prisma.logUncheckedCreateNestedManyWithoutApi_keyInput
 }
 
 export type api_keyUpdateInput = {
@@ -297,7 +292,6 @@ export type api_keyUpdateInput = {
   status?: Prisma.IntFieldUpdateOperationsInput | number
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.projectUpdateOneRequiredWithoutApi_keysNestedInput
-  logs?: Prisma.logUpdateManyWithoutApi_keyNestedInput
 }
 
 export type api_keyUncheckedUpdateInput = {
@@ -306,7 +300,6 @@ export type api_keyUncheckedUpdateInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.IntFieldUpdateOperationsInput | number
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  logs?: Prisma.logUncheckedUpdateManyWithoutApi_keyNestedInput
 }
 
 export type api_keyCreateManyInput = {
@@ -377,11 +370,6 @@ export type api_keySumOrderByAggregateInput = {
   status?: Prisma.SortOrder
 }
 
-export type Api_keyScalarRelationFilter = {
-  is?: Prisma.api_keyWhereInput
-  isNot?: Prisma.api_keyWhereInput
-}
-
 export type api_keyCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.api_keyCreateWithoutProjectInput, Prisma.api_keyUncheckedCreateWithoutProjectInput> | Prisma.api_keyCreateWithoutProjectInput[] | Prisma.api_keyUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.api_keyCreateOrConnectWithoutProjectInput | Prisma.api_keyCreateOrConnectWithoutProjectInput[]
@@ -424,25 +412,10 @@ export type api_keyUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.api_keyScalarWhereInput | Prisma.api_keyScalarWhereInput[]
 }
 
-export type api_keyCreateNestedOneWithoutLogsInput = {
-  create?: Prisma.XOR<Prisma.api_keyCreateWithoutLogsInput, Prisma.api_keyUncheckedCreateWithoutLogsInput>
-  connectOrCreate?: Prisma.api_keyCreateOrConnectWithoutLogsInput
-  connect?: Prisma.api_keyWhereUniqueInput
-}
-
-export type api_keyUpdateOneRequiredWithoutLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.api_keyCreateWithoutLogsInput, Prisma.api_keyUncheckedCreateWithoutLogsInput>
-  connectOrCreate?: Prisma.api_keyCreateOrConnectWithoutLogsInput
-  upsert?: Prisma.api_keyUpsertWithoutLogsInput
-  connect?: Prisma.api_keyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.api_keyUpdateToOneWithWhereWithoutLogsInput, Prisma.api_keyUpdateWithoutLogsInput>, Prisma.api_keyUncheckedUpdateWithoutLogsInput>
-}
-
 export type api_keyCreateWithoutProjectInput = {
   key: string
   status?: number
   timestamp?: Date | string
-  logs?: Prisma.logCreateNestedManyWithoutApi_keyInput
 }
 
 export type api_keyUncheckedCreateWithoutProjectInput = {
@@ -450,7 +423,6 @@ export type api_keyUncheckedCreateWithoutProjectInput = {
   key: string
   status?: number
   timestamp?: Date | string
-  logs?: Prisma.logUncheckedCreateNestedManyWithoutApi_keyInput
 }
 
 export type api_keyCreateOrConnectWithoutProjectInput = {
@@ -490,52 +462,6 @@ export type api_keyScalarWhereInput = {
   timestamp?: Prisma.DateTimeFilter<"api_key"> | Date | string
 }
 
-export type api_keyCreateWithoutLogsInput = {
-  key: string
-  status?: number
-  timestamp?: Date | string
-  project: Prisma.projectCreateNestedOneWithoutApi_keysInput
-}
-
-export type api_keyUncheckedCreateWithoutLogsInput = {
-  id?: number
-  key: string
-  project_id: number
-  status?: number
-  timestamp?: Date | string
-}
-
-export type api_keyCreateOrConnectWithoutLogsInput = {
-  where: Prisma.api_keyWhereUniqueInput
-  create: Prisma.XOR<Prisma.api_keyCreateWithoutLogsInput, Prisma.api_keyUncheckedCreateWithoutLogsInput>
-}
-
-export type api_keyUpsertWithoutLogsInput = {
-  update: Prisma.XOR<Prisma.api_keyUpdateWithoutLogsInput, Prisma.api_keyUncheckedUpdateWithoutLogsInput>
-  create: Prisma.XOR<Prisma.api_keyCreateWithoutLogsInput, Prisma.api_keyUncheckedCreateWithoutLogsInput>
-  where?: Prisma.api_keyWhereInput
-}
-
-export type api_keyUpdateToOneWithWhereWithoutLogsInput = {
-  where?: Prisma.api_keyWhereInput
-  data: Prisma.XOR<Prisma.api_keyUpdateWithoutLogsInput, Prisma.api_keyUncheckedUpdateWithoutLogsInput>
-}
-
-export type api_keyUpdateWithoutLogsInput = {
-  key?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project?: Prisma.projectUpdateOneRequiredWithoutApi_keysNestedInput
-}
-
-export type api_keyUncheckedUpdateWithoutLogsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  key?: Prisma.StringFieldUpdateOperationsInput | string
-  project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type api_keyCreateManyProjectInput = {
   id?: number
   key: string
@@ -547,7 +473,6 @@ export type api_keyUpdateWithoutProjectInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  logs?: Prisma.logUpdateManyWithoutApi_keyNestedInput
 }
 
 export type api_keyUncheckedUpdateWithoutProjectInput = {
@@ -555,7 +480,6 @@ export type api_keyUncheckedUpdateWithoutProjectInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  logs?: Prisma.logUncheckedUpdateManyWithoutApi_keyNestedInput
 }
 
 export type api_keyUncheckedUpdateManyWithoutProjectInput = {
@@ -566,35 +490,6 @@ export type api_keyUncheckedUpdateManyWithoutProjectInput = {
 }
 
 
-/**
- * Count Type Api_keyCountOutputType
- */
-
-export type Api_keyCountOutputType = {
-  logs: number
-}
-
-export type Api_keyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  logs?: boolean | Api_keyCountOutputTypeCountLogsArgs
-}
-
-/**
- * Api_keyCountOutputType without action
- */
-export type Api_keyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Api_keyCountOutputType
-   */
-  select?: Prisma.Api_keyCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * Api_keyCountOutputType without action
- */
-export type Api_keyCountOutputTypeCountLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.logWhereInput
-}
-
 
 export type api_keySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -603,8 +498,6 @@ export type api_keySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   status?: boolean
   timestamp?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
-  logs?: boolean | Prisma.api_key$logsArgs<ExtArgs>
-  _count?: boolean | Prisma.Api_keyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["api_key"]>
 
 export type api_keySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -636,8 +529,6 @@ export type api_keySelectScalar = {
 export type api_keyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "project_id" | "status" | "timestamp", ExtArgs["result"]["api_key"]>
 export type api_keyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
-  logs?: boolean | Prisma.api_key$logsArgs<ExtArgs>
-  _count?: boolean | Prisma.Api_keyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type api_keyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
@@ -650,7 +541,6 @@ export type $api_keyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "api_key"
   objects: {
     project: Prisma.$projectPayload<ExtArgs>
-    logs: Prisma.$logPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1053,7 +943,6 @@ readonly fields: api_keyFieldRefs;
 export interface Prisma__api_keyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.projectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.projectDefaultArgs<ExtArgs>>): Prisma.Prisma__projectClient<runtime.Types.Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  logs<T extends Prisma.api_key$logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.api_key$logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$logPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1481,30 +1370,6 @@ export type api_keyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many api_keys to delete.
    */
   limit?: number
-}
-
-/**
- * api_key.logs
- */
-export type api_key$logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the log
-   */
-  select?: Prisma.logSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the log
-   */
-  omit?: Prisma.logOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.logInclude<ExtArgs> | null
-  where?: Prisma.logWhereInput
-  orderBy?: Prisma.logOrderByWithRelationInput | Prisma.logOrderByWithRelationInput[]
-  cursor?: Prisma.logWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LogScalarFieldEnum | Prisma.LogScalarFieldEnum[]
 }
 
 /**

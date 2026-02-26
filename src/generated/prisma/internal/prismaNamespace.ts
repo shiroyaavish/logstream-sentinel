@@ -852,7 +852,7 @@ export type Api_keyScalarFieldEnum = (typeof Api_keyScalarFieldEnum)[keyof typeo
 
 export const LogScalarFieldEnum = {
   id: 'id',
-  api_key_id: 'api_key_id',
+  project_id: 'project_id',
   message: 'message',
   metadata: 'metadata',
   level: 'level',

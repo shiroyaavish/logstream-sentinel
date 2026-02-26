@@ -28,17 +28,17 @@ export type AggregateLog = {
 
 export type LogAvgAggregateOutputType = {
   id: number | null
-  api_key_id: number | null
+  project_id: number | null
 }
 
 export type LogSumAggregateOutputType = {
   id: number | null
-  api_key_id: number | null
+  project_id: number | null
 }
 
 export type LogMinAggregateOutputType = {
   id: number | null
-  api_key_id: number | null
+  project_id: number | null
   message: string | null
   level: $Enums.LogLevel | null
   timestamp: Date | null
@@ -46,7 +46,7 @@ export type LogMinAggregateOutputType = {
 
 export type LogMaxAggregateOutputType = {
   id: number | null
-  api_key_id: number | null
+  project_id: number | null
   message: string | null
   level: $Enums.LogLevel | null
   timestamp: Date | null
@@ -54,7 +54,7 @@ export type LogMaxAggregateOutputType = {
 
 export type LogCountAggregateOutputType = {
   id: number
-  api_key_id: number
+  project_id: number
   message: number
   metadata: number
   level: number
@@ -65,17 +65,17 @@ export type LogCountAggregateOutputType = {
 
 export type LogAvgAggregateInputType = {
   id?: true
-  api_key_id?: true
+  project_id?: true
 }
 
 export type LogSumAggregateInputType = {
   id?: true
-  api_key_id?: true
+  project_id?: true
 }
 
 export type LogMinAggregateInputType = {
   id?: true
-  api_key_id?: true
+  project_id?: true
   message?: true
   level?: true
   timestamp?: true
@@ -83,7 +83,7 @@ export type LogMinAggregateInputType = {
 
 export type LogMaxAggregateInputType = {
   id?: true
-  api_key_id?: true
+  project_id?: true
   message?: true
   level?: true
   timestamp?: true
@@ -91,7 +91,7 @@ export type LogMaxAggregateInputType = {
 
 export type LogCountAggregateInputType = {
   id?: true
-  api_key_id?: true
+  project_id?: true
   message?: true
   metadata?: true
   level?: true
@@ -187,7 +187,7 @@ export type logGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type LogGroupByOutputType = {
   id: number
-  api_key_id: number
+  project_id: number
   message: string
   metadata: runtime.JsonValue
   level: $Enums.LogLevel
@@ -219,22 +219,22 @@ export type logWhereInput = {
   OR?: Prisma.logWhereInput[]
   NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
   id?: Prisma.IntFilter<"log"> | number
-  api_key_id?: Prisma.IntFilter<"log"> | number
+  project_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
   timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
-  api_key?: Prisma.XOR<Prisma.Api_keyScalarRelationFilter, Prisma.api_keyWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
 }
 
 export type logOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
-  api_key?: Prisma.api_keyOrderByWithRelationInput
+  project?: Prisma.projectOrderByWithRelationInput
 }
 
 export type logWhereUniqueInput = Prisma.AtLeast<{
@@ -242,17 +242,17 @@ export type logWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
   OR?: Prisma.logWhereInput[]
   NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
-  api_key_id?: Prisma.IntFilter<"log"> | number
+  project_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
   timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
-  api_key?: Prisma.XOR<Prisma.Api_keyScalarRelationFilter, Prisma.api_keyWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
 }, "id">
 
 export type logOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
@@ -269,7 +269,7 @@ export type logScalarWhereWithAggregatesInput = {
   OR?: Prisma.logScalarWhereWithAggregatesInput[]
   NOT?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"log"> | number
-  api_key_id?: Prisma.IntWithAggregatesFilter<"log"> | number
+  project_id?: Prisma.IntWithAggregatesFilter<"log"> | number
   message?: Prisma.StringWithAggregatesFilter<"log"> | string
   metadata?: Prisma.JsonWithAggregatesFilter<"log">
   level?: Prisma.EnumLogLevelWithAggregatesFilter<"log"> | $Enums.LogLevel
@@ -281,12 +281,12 @@ export type logCreateInput = {
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
   timestamp?: Date | string
-  api_key: Prisma.api_keyCreateNestedOneWithoutLogsInput
+  project: Prisma.projectCreateNestedOneWithoutLogsInput
 }
 
 export type logUncheckedCreateInput = {
   id?: number
-  api_key_id: number
+  project_id: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -298,12 +298,12 @@ export type logUpdateInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  api_key?: Prisma.api_keyUpdateOneRequiredWithoutLogsNestedInput
+  project?: Prisma.projectUpdateOneRequiredWithoutLogsNestedInput
 }
 
 export type logUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  api_key_id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -312,7 +312,7 @@ export type logUncheckedUpdateInput = {
 
 export type logCreateManyInput = {
   id?: number
-  api_key_id: number
+  project_id: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
@@ -328,7 +328,7 @@ export type logUpdateManyMutationInput = {
 
 export type logUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  api_key_id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
@@ -347,7 +347,7 @@ export type logOrderByRelationAggregateInput = {
 
 export type logCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
@@ -356,12 +356,12 @@ export type logCountOrderByAggregateInput = {
 
 export type logAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
 }
 
 export type logMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
@@ -369,7 +369,7 @@ export type logMaxOrderByAggregateInput = {
 
 export type logMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
@@ -377,48 +377,48 @@ export type logMinOrderByAggregateInput = {
 
 export type logSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  api_key_id?: Prisma.SortOrder
+  project_id?: Prisma.SortOrder
 }
 
-export type logCreateNestedManyWithoutApi_keyInput = {
-  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
-  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
-  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+export type logCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutProjectInput, Prisma.logUncheckedCreateWithoutProjectInput> | Prisma.logCreateWithoutProjectInput[] | Prisma.logUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutProjectInput | Prisma.logCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.logCreateManyProjectInputEnvelope
   connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
 }
 
-export type logUncheckedCreateNestedManyWithoutApi_keyInput = {
-  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
-  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
-  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+export type logUncheckedCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutProjectInput, Prisma.logUncheckedCreateWithoutProjectInput> | Prisma.logCreateWithoutProjectInput[] | Prisma.logUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutProjectInput | Prisma.logCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.logCreateManyProjectInputEnvelope
   connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
 }
 
-export type logUpdateManyWithoutApi_keyNestedInput = {
-  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
-  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
-  upsert?: Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput | Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput[]
-  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+export type logUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutProjectInput, Prisma.logUncheckedCreateWithoutProjectInput> | Prisma.logCreateWithoutProjectInput[] | Prisma.logUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutProjectInput | Prisma.logCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.logUpsertWithWhereUniqueWithoutProjectInput | Prisma.logUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.logCreateManyProjectInputEnvelope
   set?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
   disconnect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
   delete?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
   connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
-  update?: Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput | Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput[]
-  updateMany?: Prisma.logUpdateManyWithWhereWithoutApi_keyInput | Prisma.logUpdateManyWithWhereWithoutApi_keyInput[]
+  update?: Prisma.logUpdateWithWhereUniqueWithoutProjectInput | Prisma.logUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.logUpdateManyWithWhereWithoutProjectInput | Prisma.logUpdateManyWithWhereWithoutProjectInput[]
   deleteMany?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
 }
 
-export type logUncheckedUpdateManyWithoutApi_keyNestedInput = {
-  create?: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput> | Prisma.logCreateWithoutApi_keyInput[] | Prisma.logUncheckedCreateWithoutApi_keyInput[]
-  connectOrCreate?: Prisma.logCreateOrConnectWithoutApi_keyInput | Prisma.logCreateOrConnectWithoutApi_keyInput[]
-  upsert?: Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput | Prisma.logUpsertWithWhereUniqueWithoutApi_keyInput[]
-  createMany?: Prisma.logCreateManyApi_keyInputEnvelope
+export type logUncheckedUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.logCreateWithoutProjectInput, Prisma.logUncheckedCreateWithoutProjectInput> | Prisma.logCreateWithoutProjectInput[] | Prisma.logUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.logCreateOrConnectWithoutProjectInput | Prisma.logCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.logUpsertWithWhereUniqueWithoutProjectInput | Prisma.logUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.logCreateManyProjectInputEnvelope
   set?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
   disconnect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
   delete?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
   connect?: Prisma.logWhereUniqueInput | Prisma.logWhereUniqueInput[]
-  update?: Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput | Prisma.logUpdateWithWhereUniqueWithoutApi_keyInput[]
-  updateMany?: Prisma.logUpdateManyWithWhereWithoutApi_keyInput | Prisma.logUpdateManyWithWhereWithoutApi_keyInput[]
+  update?: Prisma.logUpdateWithWhereUniqueWithoutProjectInput | Prisma.logUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.logUpdateManyWithWhereWithoutProjectInput | Prisma.logUpdateManyWithWhereWithoutProjectInput[]
   deleteMany?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
 }
 
@@ -426,14 +426,14 @@ export type EnumLogLevelFieldUpdateOperationsInput = {
   set?: $Enums.LogLevel
 }
 
-export type logCreateWithoutApi_keyInput = {
+export type logCreateWithoutProjectInput = {
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
   timestamp?: Date | string
 }
 
-export type logUncheckedCreateWithoutApi_keyInput = {
+export type logUncheckedCreateWithoutProjectInput = {
   id?: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -441,30 +441,30 @@ export type logUncheckedCreateWithoutApi_keyInput = {
   timestamp?: Date | string
 }
 
-export type logCreateOrConnectWithoutApi_keyInput = {
+export type logCreateOrConnectWithoutProjectInput = {
   where: Prisma.logWhereUniqueInput
-  create: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput>
+  create: Prisma.XOR<Prisma.logCreateWithoutProjectInput, Prisma.logUncheckedCreateWithoutProjectInput>
 }
 
-export type logCreateManyApi_keyInputEnvelope = {
-  data: Prisma.logCreateManyApi_keyInput | Prisma.logCreateManyApi_keyInput[]
+export type logCreateManyProjectInputEnvelope = {
+  data: Prisma.logCreateManyProjectInput | Prisma.logCreateManyProjectInput[]
   skipDuplicates?: boolean
 }
 
-export type logUpsertWithWhereUniqueWithoutApi_keyInput = {
+export type logUpsertWithWhereUniqueWithoutProjectInput = {
   where: Prisma.logWhereUniqueInput
-  update: Prisma.XOR<Prisma.logUpdateWithoutApi_keyInput, Prisma.logUncheckedUpdateWithoutApi_keyInput>
-  create: Prisma.XOR<Prisma.logCreateWithoutApi_keyInput, Prisma.logUncheckedCreateWithoutApi_keyInput>
+  update: Prisma.XOR<Prisma.logUpdateWithoutProjectInput, Prisma.logUncheckedUpdateWithoutProjectInput>
+  create: Prisma.XOR<Prisma.logCreateWithoutProjectInput, Prisma.logUncheckedCreateWithoutProjectInput>
 }
 
-export type logUpdateWithWhereUniqueWithoutApi_keyInput = {
+export type logUpdateWithWhereUniqueWithoutProjectInput = {
   where: Prisma.logWhereUniqueInput
-  data: Prisma.XOR<Prisma.logUpdateWithoutApi_keyInput, Prisma.logUncheckedUpdateWithoutApi_keyInput>
+  data: Prisma.XOR<Prisma.logUpdateWithoutProjectInput, Prisma.logUncheckedUpdateWithoutProjectInput>
 }
 
-export type logUpdateManyWithWhereWithoutApi_keyInput = {
+export type logUpdateManyWithWhereWithoutProjectInput = {
   where: Prisma.logScalarWhereInput
-  data: Prisma.XOR<Prisma.logUpdateManyMutationInput, Prisma.logUncheckedUpdateManyWithoutApi_keyInput>
+  data: Prisma.XOR<Prisma.logUpdateManyMutationInput, Prisma.logUncheckedUpdateManyWithoutProjectInput>
 }
 
 export type logScalarWhereInput = {
@@ -472,14 +472,14 @@ export type logScalarWhereInput = {
   OR?: Prisma.logScalarWhereInput[]
   NOT?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
   id?: Prisma.IntFilter<"log"> | number
-  api_key_id?: Prisma.IntFilter<"log"> | number
+  project_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
   timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
 }
 
-export type logCreateManyApi_keyInput = {
+export type logCreateManyProjectInput = {
   id?: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -487,14 +487,14 @@ export type logCreateManyApi_keyInput = {
   timestamp?: Date | string
 }
 
-export type logUpdateWithoutApi_keyInput = {
+export type logUpdateWithoutProjectInput = {
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type logUncheckedUpdateWithoutApi_keyInput = {
+export type logUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -502,7 +502,7 @@ export type logUncheckedUpdateWithoutApi_keyInput = {
   timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type logUncheckedUpdateManyWithoutApi_keyInput = {
+export type logUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -514,62 +514,62 @@ export type logUncheckedUpdateManyWithoutApi_keyInput = {
 
 export type logSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  api_key_id?: boolean
+  project_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
-  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
 export type logSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  api_key_id?: boolean
+  project_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
-  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
 export type logSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  api_key_id?: boolean
+  project_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
-  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
 export type logSelectScalar = {
   id?: boolean
-  api_key_id?: boolean
+  project_id?: boolean
   message?: boolean
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
 }
 
-export type logOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "api_key_id" | "message" | "metadata" | "level" | "timestamp", ExtArgs["result"]["log"]>
+export type logOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "message" | "metadata" | "level" | "timestamp", ExtArgs["result"]["log"]>
 export type logInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }
 export type logIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }
 export type logIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  api_key?: boolean | Prisma.api_keyDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }
 
 export type $logPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "log"
   objects: {
-    api_key: Prisma.$api_keyPayload<ExtArgs>
+    project: Prisma.$projectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    api_key_id: number
+    project_id: number
     message: string
     metadata: runtime.JsonValue
     level: $Enums.LogLevel
@@ -968,7 +968,7 @@ readonly fields: logFieldRefs;
  */
 export interface Prisma__logClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  api_key<T extends Prisma.api_keyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.api_keyDefaultArgs<ExtArgs>>): Prisma.Prisma__api_keyClient<runtime.Types.Result.GetResult<Prisma.$api_keyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  project<T extends Prisma.projectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.projectDefaultArgs<ExtArgs>>): Prisma.Prisma__projectClient<runtime.Types.Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -999,7 +999,7 @@ export interface Prisma__logClient<T, Null = never, ExtArgs extends runtime.Type
  */
 export interface logFieldRefs {
   readonly id: Prisma.FieldRef<"log", 'Int'>
-  readonly api_key_id: Prisma.FieldRef<"log", 'Int'>
+  readonly project_id: Prisma.FieldRef<"log", 'Int'>
   readonly message: Prisma.FieldRef<"log", 'String'>
   readonly metadata: Prisma.FieldRef<"log", 'Json'>
   readonly level: Prisma.FieldRef<"log", 'LogLevel'>

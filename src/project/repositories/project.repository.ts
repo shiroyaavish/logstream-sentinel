@@ -13,8 +13,8 @@ export class ProjectRepository implements IProjectRepository {
         return this.prisma.project.create({ data })
     }
 
-    async findById(id: number, userId: number): Promise<project | null> {
-        return this.prisma.project.findUnique({ where: { id, user_id: userId } })
+    async findById(id: number): Promise<project | null> {
+        return this.prisma.project.findUnique({ where: { id } })
     }
 
     async findAll(query: Record<string, any>, offset: number, limit: number): Promise<project[]> {

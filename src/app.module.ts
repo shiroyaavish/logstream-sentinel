@@ -8,6 +8,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { ProjectModule } from './project/project.module';
 import { SharedModule } from './shared/shared.module';
+import { WebsocketModule } from './websocket/websocket.module';
+import { LogsModule } from './logs/logs.module';
 
 @Module({
   imports: [
@@ -20,7 +22,9 @@ import { SharedModule } from './shared/shared.module';
     PrismaModule,
     UserModule,
     ProjectModule,
-    SharedModule
+    SharedModule,
+    WebsocketModule,
+    LogsModule
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

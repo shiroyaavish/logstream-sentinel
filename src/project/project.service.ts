@@ -80,11 +80,7 @@ export class ProjectService {
 
     } catch (error) {
       this.logger.error('Error generating API Key :: ', error)
-      throw new HttpException({
-        status: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: "An error occurred while generating API Key",
-        data: {}
-      }, HttpStatus.INTERNAL_SERVER_ERROR)
+      throw error
     }
   }
 
@@ -141,7 +137,8 @@ export class ProjectService {
       const apiKeyDetails = await this.apiKeyRepository.findByProjectId(projectDetails.id, userId)
 
       const data = {
-        ...projectDetails, api_key_exists: apiKeyDetails?.key ? true : false,
+        ...projectDetails,
+        api_key_exists: apiKeyDetails?.key ? true : false,
         api_key_active: apiKeyDetails?.status === 0 ? true : false
       }
 
@@ -223,9 +220,5 @@ export class ProjectService {
         data: {}
       }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} project`;
   }
 }

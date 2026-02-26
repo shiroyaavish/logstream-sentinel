@@ -13,37 +13,32 @@ export class ProjectController {
   constructor(private readonly projectService: ProjectService) { }
 
   @Post()
-  create(@Req() request: Request, @Body() createProjectDto: CreateProjectDto) {
-    return this.projectService.create(request, createProjectDto);
+  async create(@Req() request: Request, @Body() createProjectDto: CreateProjectDto) {
+    return await this.projectService.create(request, createProjectDto);
   }
 
   @Post("generate-api-key")
   async generateApiKey(@Req() request: Request, @Body() generateApiKeyDto: GenerateApiKeyDto) {
-    return this.projectService.generateApiKey(request, generateApiKeyDto)
+    return await this.projectService.generateApiKey(request, generateApiKeyDto)
   }
 
   @Get()
-  findAll(@Req() request: Request, @Query() findAllProjectsDto: FindAllProjectsDto) {
-    return this.projectService.findAll(request, findAllProjectsDto);
+  async findAll(@Req() request: Request, @Query() findAllProjectsDto: FindAllProjectsDto) {
+    return await this.projectService.findAll(request, findAllProjectsDto);
   }
 
   @Patch("api-key/:id/active-inactive")
-  activeInactiveApiKey(@Req() request: Request, @Param("id") id: number) {
-    return this.projectService.activeInactiveApiKey(request, +id)
+  async activeInactiveApiKey(@Req() request: Request, @Param("id") id: number) {
+    return await this.projectService.activeInactiveApiKey(request, +id)
   }
 
   @Get(':id')
-  findOne(@Req() request: Request, @Param('id') id: string) {
-    return this.projectService.findOne(request, +id);
+  async findOne(@Req() request: Request, @Param('id') id: string) {
+    return await this.projectService.findOne(request, +id);
   }
 
   @Patch(':id')
-  update(@Req() request: Request, @Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-    return this.projectService.update(request, + id, updateProjectDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.projectService.remove(+id);
+  async update(@Req() request: Request, @Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
+    return await this.projectService.update(request, + id, updateProjectDto);
   }
 }

@@ -83,6 +83,10 @@ export class AuthService {
   async refreshToken(req: Request) {
     try {
       const user = req.user as any
+      const session = await this.sessionRepository.findBySessionId(user.sid)
+      if (!session) {
+        throw new HttpException({ status: HttpStatus.BAD_REQUEST, message: "Session not found." }, HttpStatus.BAD_REQUEST);
+      }
       await this.sessionRepository.delete(user.session_id)
       const sessionData = {
         user_id: user.id,

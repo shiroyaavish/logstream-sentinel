@@ -19,21 +19,26 @@ export class LogProcessor extends WorkerHost {
         try {
             console.log("Processing job :: ", job.id)
             const { logs, api_key } = job.data;
-    
+
             const project = await this.projectRepository.findById(api_key.project_id);
-    
+
             const data = logs.map(log => ({
                 ...log,
                 project_id: api_key.project_id,
             }))
-    
+
             // console.log("Logs data :: ", data)
             const logsData = await this.logRepository.createMany(data)
             // console.log("Logs data :: ", logsData)
-            this.eventGateway.sendToUser(String(project.user_id), "set_logs", logsData)
-    
+            console.log(project.user_id)
+            if (this.eventGateway.checkRoomExists(`project_${String(project.id)}`)) {
+                this.eventGateway.sendToUser(`project_${String(project.id)}`, "set_logs", logsData)
+            } else {
+                this.eventGateway.sendToUser(String(project.user_id), "set_logs", logsData)
+            }
+
             return;
-            
+
         } catch (error) {
             console.error("Error processing job :: ", error)
             throw error;

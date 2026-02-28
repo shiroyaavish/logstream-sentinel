@@ -1,20 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from '@nestjs/common';
 import { LogsService } from './logs.service';
-import { CreateLogDto } from './dto/create-log.dto';
+import { CreateLogDto, FindAllLogsDto } from './dto/create-log.dto';
 import { UpdateLogDto } from './dto/update-log.dto';
+import { Request } from 'express';
+import { JwtAuthGuard } from 'src/auth/lib/jwt-auth.guard';
 
 @Controller('logs')
+@UseGuards(JwtAuthGuard)
 export class LogsController {
-  constructor(private readonly logsService: LogsService) {}
+  constructor(private readonly logsService: LogsService) { }
 
-  @Post()
-  create(@Body() createLogDto: CreateLogDto) {
-    return this.logsService.create(createLogDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.logsService.findAll();
+  @Post("/findAll")
+  async findAll(@Req() request: Request, @Body() findAllLogsDto: FindAllLogsDto) {
+    return await this.logsService.findAll(request, findAllLogsDto);
   }
 
   @Get(':id')

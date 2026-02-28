@@ -48,12 +48,12 @@ export class WebsocketService {
         client.emit('error', { message: 'Project not found' });
         return;
       }
-      console.log("Project details :: ", project)
+      // console.log("Project details :: ", project)
 
       client.join(`project_${project_id}`);
       client.emit('joinedProjectRoom', { message: `Joined project room ${project_id}` });
 
-      console.log(`User Joined Project Room :: project_${project_id}`);
+      // console.log(`User Joined Project Room :: project_${project_id}`);
 
     } catch (error) {
       console.error('Error joining project room', error);

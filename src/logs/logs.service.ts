@@ -22,17 +22,17 @@ export class LogsService {
 
       const user = request.user;
 
-      const project = await this.projectRepository.findById(project_id);
 
-      if (!project || project.user_id !== user["id"]) {
-        throw new HttpException({
-          status: HttpStatus.NOT_FOUND,
-          message: "Project not found or you don't have access to this project",
-        }, HttpStatus.NOT_FOUND)
+      const query: any = {}
+
+      if (!project_id) {
+        query["project"] = {
+          user_id: user["id"]
+        }
+      } else {
+        query["project_id"] = project_id
       }
-      const query: any = {
-        project_id,
-      }
+
       if (level) {
         query.level = level
       }

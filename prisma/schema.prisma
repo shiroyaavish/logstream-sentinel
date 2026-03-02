@@ -47,7 +47,7 @@ model api_key {
   key        String   @unique // This is the actual string used in headers
   project_id Int
   project    project  @relation(fields: [project_id], references: [id])
-  status     Int      @default(0) // 0 = active, 1 = revoked
+  status     Int      @default(0) // 0 = active, 1 = revoked, 2 = deleted 
   timestamp  DateTime @default(now())
 }
 

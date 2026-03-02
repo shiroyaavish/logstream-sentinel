@@ -57,11 +57,7 @@ export class ProjectService {
 
       const existingApiKey = await this.apiKeyRepository.findByProjectId(project_id, user["id"])
       if (existingApiKey) {
-        throw new HttpException({
-          status: HttpStatus.CONFLICT,
-          message: "API Key already exists for this project",
-          data: {}
-        }, HttpStatus.CONFLICT)
+        await this.apiKeyRepository.updateStatus(existingApiKey.id, 2)
       }
 
       const apiKey = crypto.randomUUID()
@@ -135,11 +131,12 @@ export class ProjectService {
       }
 
       const apiKeyDetails = await this.apiKeyRepository.findByProjectId(projectDetails.id, userId)
-
+      console.log("API Key details :: ", apiKeyDetails)
       const data = {
         ...projectDetails,
         api_key_exists: apiKeyDetails?.key ? true : false,
-        api_key_active: apiKeyDetails?.status === 0 ? true : false
+        api_key_active: apiKeyDetails?.status === 0 ? true : false,
+        api_key_id: apiKeyDetails?.id || null
       }
 
       return {
@@ -197,7 +194,7 @@ export class ProjectService {
     try {
       const user = request.user
       const apiKeyDetails = await this.apiKeyRepository.findById(id, user["id"])
-      if (!apiKeyDetails) {
+      if (!apiKeyDetails || apiKeyDetails.status === 2) {
         throw new HttpException({
           status: HttpStatus.NOT_FOUND,
           message: "API Key not found",

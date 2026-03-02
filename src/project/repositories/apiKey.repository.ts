@@ -19,7 +19,7 @@ export class ApiKeyRepository implements IApiKeyRepository {
         return await this.prisma.api_key.findFirst({ where: { id, project: { user_id: userId } } })
     }
     async findByProjectId(project_id: number, userId: number): Promise<api_key | null> {
-        return await this.prisma.api_key.findFirst({ where: { project_id, project: { user_id: userId } } })
+        return await this.prisma.api_key.findFirst({ where: { project_id, project: { user_id: userId }, status: { in: [0, 1] } } })
     }
     async findAll(query?: Record<string, any>): Promise<api_key[]> {
         return await this.prisma.api_key.findMany({ where: query })

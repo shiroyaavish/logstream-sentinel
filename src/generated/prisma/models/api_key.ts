@@ -43,7 +43,8 @@ export type Api_keyMinAggregateOutputType = {
   key: string | null
   project_id: number | null
   status: number | null
-  timestamp: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type Api_keyMaxAggregateOutputType = {
@@ -51,7 +52,8 @@ export type Api_keyMaxAggregateOutputType = {
   key: string | null
   project_id: number | null
   status: number | null
-  timestamp: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type Api_keyCountAggregateOutputType = {
@@ -59,7 +61,8 @@ export type Api_keyCountAggregateOutputType = {
   key: number
   project_id: number
   status: number
-  timestamp: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -81,7 +84,8 @@ export type Api_keyMinAggregateInputType = {
   key?: true
   project_id?: true
   status?: true
-  timestamp?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type Api_keyMaxAggregateInputType = {
@@ -89,7 +93,8 @@ export type Api_keyMaxAggregateInputType = {
   key?: true
   project_id?: true
   status?: true
-  timestamp?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type Api_keyCountAggregateInputType = {
@@ -97,7 +102,8 @@ export type Api_keyCountAggregateInputType = {
   key?: true
   project_id?: true
   status?: true
-  timestamp?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -192,7 +198,8 @@ export type Api_keyGroupByOutputType = {
   key: string
   project_id: number
   status: number
-  timestamp: Date
+  createdAt: Date
+  updatedAt: Date
   _count: Api_keyCountAggregateOutputType | null
   _avg: Api_keyAvgAggregateOutputType | null
   _sum: Api_keySumAggregateOutputType | null
@@ -223,7 +230,8 @@ export type api_keyWhereInput = {
   key?: Prisma.StringFilter<"api_key"> | string
   project_id?: Prisma.IntFilter<"api_key"> | number
   status?: Prisma.IntFilter<"api_key"> | number
-  timestamp?: Prisma.DateTimeFilter<"api_key"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"api_key"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"api_key"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
 }
 
@@ -232,7 +240,8 @@ export type api_keyOrderByWithRelationInput = {
   key?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   project?: Prisma.projectOrderByWithRelationInput
 }
 
@@ -244,7 +253,8 @@ export type api_keyWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.api_keyWhereInput | Prisma.api_keyWhereInput[]
   project_id?: Prisma.IntFilter<"api_key"> | number
   status?: Prisma.IntFilter<"api_key"> | number
-  timestamp?: Prisma.DateTimeFilter<"api_key"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"api_key"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"api_key"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
 }, "id" | "key">
 
@@ -253,7 +263,8 @@ export type api_keyOrderByWithAggregationInput = {
   key?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.api_keyCountOrderByAggregateInput
   _avg?: Prisma.api_keyAvgOrderByAggregateInput
   _max?: Prisma.api_keyMaxOrderByAggregateInput
@@ -269,13 +280,15 @@ export type api_keyScalarWhereWithAggregatesInput = {
   key?: Prisma.StringWithAggregatesFilter<"api_key"> | string
   project_id?: Prisma.IntWithAggregatesFilter<"api_key"> | number
   status?: Prisma.IntWithAggregatesFilter<"api_key"> | number
-  timestamp?: Prisma.DateTimeWithAggregatesFilter<"api_key"> | Date | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"api_key"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"api_key"> | Date | string
 }
 
 export type api_keyCreateInput = {
   key: string
   status?: number
-  timestamp?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   project: Prisma.projectCreateNestedOneWithoutApi_keysInput
 }
 
@@ -284,13 +297,15 @@ export type api_keyUncheckedCreateInput = {
   key: string
   project_id: number
   status?: number
-  timestamp?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type api_keyUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.projectUpdateOneRequiredWithoutApi_keysNestedInput
 }
 
@@ -299,7 +314,8 @@ export type api_keyUncheckedUpdateInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type api_keyCreateManyInput = {
@@ -307,13 +323,15 @@ export type api_keyCreateManyInput = {
   key: string
   project_id: number
   status?: number
-  timestamp?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type api_keyUpdateManyMutationInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type api_keyUncheckedUpdateManyInput = {
@@ -321,7 +339,8 @@ export type api_keyUncheckedUpdateManyInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Api_keyListRelationFilter = {
@@ -339,7 +358,8 @@ export type api_keyCountOrderByAggregateInput = {
   key?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type api_keyAvgOrderByAggregateInput = {
@@ -353,7 +373,8 @@ export type api_keyMaxOrderByAggregateInput = {
   key?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type api_keyMinOrderByAggregateInput = {
@@ -361,7 +382,8 @@ export type api_keyMinOrderByAggregateInput = {
   key?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type api_keySumOrderByAggregateInput = {
@@ -415,14 +437,16 @@ export type api_keyUncheckedUpdateManyWithoutProjectNestedInput = {
 export type api_keyCreateWithoutProjectInput = {
   key: string
   status?: number
-  timestamp?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type api_keyUncheckedCreateWithoutProjectInput = {
   id?: number
   key: string
   status?: number
-  timestamp?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type api_keyCreateOrConnectWithoutProjectInput = {
@@ -459,34 +483,39 @@ export type api_keyScalarWhereInput = {
   key?: Prisma.StringFilter<"api_key"> | string
   project_id?: Prisma.IntFilter<"api_key"> | number
   status?: Prisma.IntFilter<"api_key"> | number
-  timestamp?: Prisma.DateTimeFilter<"api_key"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"api_key"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"api_key"> | Date | string
 }
 
 export type api_keyCreateManyProjectInput = {
   id?: number
   key: string
   status?: number
-  timestamp?: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type api_keyUpdateWithoutProjectInput = {
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type api_keyUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type api_keyUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   key?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.IntFieldUpdateOperationsInput | number
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -496,7 +525,8 @@ export type api_keySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   key?: boolean
   project_id?: boolean
   status?: boolean
-  timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["api_key"]>
 
@@ -505,7 +535,8 @@ export type api_keySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   key?: boolean
   project_id?: boolean
   status?: boolean
-  timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["api_key"]>
 
@@ -514,7 +545,8 @@ export type api_keySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   key?: boolean
   project_id?: boolean
   status?: boolean
-  timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["api_key"]>
 
@@ -523,10 +555,11 @@ export type api_keySelectScalar = {
   key?: boolean
   project_id?: boolean
   status?: boolean
-  timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type api_keyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "project_id" | "status" | "timestamp", ExtArgs["result"]["api_key"]>
+export type api_keyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "project_id" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["api_key"]>
 export type api_keyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }
@@ -547,7 +580,8 @@ export type $api_keyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     key: string
     project_id: number
     status: number
-    timestamp: Date
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["api_key"]>
   composites: {}
 }
@@ -976,7 +1010,8 @@ export interface api_keyFieldRefs {
   readonly key: Prisma.FieldRef<"api_key", 'String'>
   readonly project_id: Prisma.FieldRef<"api_key", 'Int'>
   readonly status: Prisma.FieldRef<"api_key", 'Int'>
-  readonly timestamp: Prisma.FieldRef<"api_key", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"api_key", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"api_key", 'DateTime'>
 }
     
 

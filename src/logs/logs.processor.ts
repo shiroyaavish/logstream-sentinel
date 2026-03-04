@@ -32,9 +32,9 @@ export class LogProcessor extends WorkerHost {
             // console.log("Logs data :: ", logsData)
             console.log(project.user_id)
             if (this.eventGateway.checkRoomExists(`project_${String(project.id)}`)) {
-                this.eventGateway.sendToUser(`project_${String(project.id)}`, "set_logs", logsData)
+                this.eventGateway.sendToUser(`project_${String(project.id)}`, "set_logs", JSON.stringify(logsData))
             } else {
-                this.eventGateway.sendToUser(String(project.user_id), "set_logs", logsData)
+                this.eventGateway.sendToUser(String(project.user_id), "set_logs", JSON.stringify(logsData))
             }
 
             return;

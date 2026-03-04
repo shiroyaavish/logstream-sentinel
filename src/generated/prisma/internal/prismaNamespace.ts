@@ -822,7 +822,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   password: 'password',
-  timestamp: 'timestamp'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -833,7 +834,8 @@ export const ProjectScalarFieldEnum = {
   name: 'name',
   description: 'description',
   user_id: 'user_id',
-  timestamp: 'timestamp'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -844,7 +846,8 @@ export const Api_keyScalarFieldEnum = {
   key: 'key',
   project_id: 'project_id',
   status: 'status',
-  timestamp: 'timestamp'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type Api_keyScalarFieldEnum = (typeof Api_keyScalarFieldEnum)[keyof typeof Api_keyScalarFieldEnum]
@@ -856,7 +859,9 @@ export const LogScalarFieldEnum = {
   message: 'message',
   metadata: 'metadata',
   level: 'level',
-  timestamp: 'timestamp'
+  timestamp: 'timestamp',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type LogScalarFieldEnum = (typeof LogScalarFieldEnum)[keyof typeof LogScalarFieldEnum]
@@ -866,8 +871,9 @@ export const SessionScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   session_id: 'session_id',
-  timestamp: 'timestamp',
-  user_agent: 'user_agent'
+  user_agent: 'user_agent',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -958,6 +964,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
     
 
 

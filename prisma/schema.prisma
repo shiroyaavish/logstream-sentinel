@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -13,7 +7,6 @@ datasource db {
   provider = "postgresql"
 }
 
-// Use an Enum for better code clarity
 enum LogLevel {
   INFO
   WARN
@@ -22,54 +15,91 @@ enum LogLevel {
 }
 
 model user {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
   name      String?
   password  String
-  timestamp DateTime  @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   projects  project[]
   sessions  session[]
+
+  @@index([email])
 }
 
 model project {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
   description String?
+
   user_id     Int
-  user        user      @relation(fields: [user_id], references: [id])
-  timestamp   DateTime  @default(now())
+  user        user     @relation(fields: [user_id], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
   api_keys    api_key[]
   logs        log[]
+
+  @@index([user_id])
+  @@index([createdAt])
 }
 
 model api_key {
   id         Int      @id @default(autoincrement())
-  key        String   @unique // This is the actual string used in headers
+  key        String   @unique
+
   project_id Int
   project    project  @relation(fields: [project_id], references: [id])
-  status     Int      @default(0) // 0 = active, 1 = revoked, 2 = deleted 
-  timestamp  DateTime @default(now())
+
+  status     Int      @default(0) // 0 active, 1 revoked, 2 deleted
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([project_id])
+  @@index([status])
 }
 
 model log {
-  // Use Int for massive scale performance
-  id         Int      @id @default(autoincrement())
+  id         BigInt   @id @default(autoincrement())
+
   project_id Int
   project    project  @relation(fields: [project_id], references: [id])
-  message    String
-  metadata   Json // Perfect for your 'JSONB' storage
-  level      LogLevel @default(INFO)
-  timestamp  DateTime @default(now())
 
-  // CRITICAL: Composite index for fast dashboard queries
+  message    String
+  metadata   Json
+
+  level      LogLevel @default(INFO)
+
+  // Unix timestamp (milliseconds)
+  timestamp  BigInt
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // 🔥 Critical indexes for log systems
+  @@index([project_id])
+  @@index([timestamp])
+  @@index([level])
   @@index([project_id, timestamp])
+  @@index([project_id, level])
 }
 
 model session {
   id         Int      @id @default(autoincrement())
+
   user_id    Int
   user       user     @relation(fields: [user_id], references: [id])
+
   session_id String
-  timestamp  DateTime @default(now())
   user_agent String
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([session_id])
+  @@index([user_id])
 }

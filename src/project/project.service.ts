@@ -65,7 +65,6 @@ export class ProjectService {
         key: apiKey,
         project_id: projectExists.id,
         status: 1,
-        timestamp: new Date()
       }
       const apiKeyCreated = await this.apiKeyRepository.create(apiKeyData)
 

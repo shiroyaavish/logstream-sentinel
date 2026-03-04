@@ -29,27 +29,33 @@ export type AggregateLog = {
 export type LogAvgAggregateOutputType = {
   id: number | null
   project_id: number | null
+  timestamp: number | null
 }
 
 export type LogSumAggregateOutputType = {
-  id: number | null
+  id: bigint | null
   project_id: number | null
+  timestamp: bigint | null
 }
 
 export type LogMinAggregateOutputType = {
-  id: number | null
+  id: bigint | null
   project_id: number | null
   message: string | null
   level: $Enums.LogLevel | null
-  timestamp: Date | null
+  timestamp: bigint | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type LogMaxAggregateOutputType = {
-  id: number | null
+  id: bigint | null
   project_id: number | null
   message: string | null
   level: $Enums.LogLevel | null
-  timestamp: Date | null
+  timestamp: bigint | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type LogCountAggregateOutputType = {
@@ -59,6 +65,8 @@ export type LogCountAggregateOutputType = {
   metadata: number
   level: number
   timestamp: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -66,11 +74,13 @@ export type LogCountAggregateOutputType = {
 export type LogAvgAggregateInputType = {
   id?: true
   project_id?: true
+  timestamp?: true
 }
 
 export type LogSumAggregateInputType = {
   id?: true
   project_id?: true
+  timestamp?: true
 }
 
 export type LogMinAggregateInputType = {
@@ -79,6 +89,8 @@ export type LogMinAggregateInputType = {
   message?: true
   level?: true
   timestamp?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type LogMaxAggregateInputType = {
@@ -87,6 +99,8 @@ export type LogMaxAggregateInputType = {
   message?: true
   level?: true
   timestamp?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type LogCountAggregateInputType = {
@@ -96,6 +110,8 @@ export type LogCountAggregateInputType = {
   metadata?: true
   level?: true
   timestamp?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -186,12 +202,14 @@ export type logGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 export type LogGroupByOutputType = {
-  id: number
+  id: bigint
   project_id: number
   message: string
   metadata: runtime.JsonValue
   level: $Enums.LogLevel
-  timestamp: Date
+  timestamp: bigint
+  createdAt: Date
+  updatedAt: Date
   _count: LogCountAggregateOutputType | null
   _avg: LogAvgAggregateOutputType | null
   _sum: LogSumAggregateOutputType | null
@@ -218,12 +236,14 @@ export type logWhereInput = {
   AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
   OR?: Prisma.logWhereInput[]
   NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
-  id?: Prisma.IntFilter<"log"> | number
+  id?: Prisma.BigIntFilter<"log"> | bigint | number
   project_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
+  timestamp?: Prisma.BigIntFilter<"log"> | bigint | number
+  createdAt?: Prisma.DateTimeFilter<"log"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"log"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
 }
 
@@ -234,11 +254,13 @@ export type logOrderByWithRelationInput = {
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   project?: Prisma.projectOrderByWithRelationInput
 }
 
 export type logWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: bigint | number
   AND?: Prisma.logWhereInput | Prisma.logWhereInput[]
   OR?: Prisma.logWhereInput[]
   NOT?: Prisma.logWhereInput | Prisma.logWhereInput[]
@@ -246,7 +268,9 @@ export type logWhereUniqueInput = Prisma.AtLeast<{
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
+  timestamp?: Prisma.BigIntFilter<"log"> | bigint | number
+  createdAt?: Prisma.DateTimeFilter<"log"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"log"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
 }, "id">
 
@@ -257,6 +281,8 @@ export type logOrderByWithAggregationInput = {
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.logCountOrderByAggregateInput
   _avg?: Prisma.logAvgOrderByAggregateInput
   _max?: Prisma.logMaxOrderByAggregateInput
@@ -268,71 +294,90 @@ export type logScalarWhereWithAggregatesInput = {
   AND?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
   OR?: Prisma.logScalarWhereWithAggregatesInput[]
   NOT?: Prisma.logScalarWhereWithAggregatesInput | Prisma.logScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"log"> | number
+  id?: Prisma.BigIntWithAggregatesFilter<"log"> | bigint | number
   project_id?: Prisma.IntWithAggregatesFilter<"log"> | number
   message?: Prisma.StringWithAggregatesFilter<"log"> | string
   metadata?: Prisma.JsonWithAggregatesFilter<"log">
   level?: Prisma.EnumLogLevelWithAggregatesFilter<"log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeWithAggregatesFilter<"log"> | Date | string
+  timestamp?: Prisma.BigIntWithAggregatesFilter<"log"> | bigint | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"log"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"log"> | Date | string
 }
 
 export type logCreateInput = {
+  id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
-  timestamp?: Date | string
+  timestamp: bigint | number
+  createdAt?: Date | string
+  updatedAt?: Date | string
   project: Prisma.projectCreateNestedOneWithoutLogsInput
 }
 
 export type logUncheckedCreateInput = {
-  id?: number
+  id?: bigint | number
   project_id: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
-  timestamp?: Date | string
+  timestamp: bigint | number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type logUpdateInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.projectUpdateOneRequiredWithoutLogsNestedInput
 }
 
 export type logUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type logCreateManyInput = {
-  id?: number
+  id?: bigint | number
   project_id: number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
-  timestamp?: Date | string
+  timestamp: bigint | number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type logUpdateManyMutationInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type logUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LogListRelationFilter = {
@@ -352,11 +397,14 @@ export type logCountOrderByAggregateInput = {
   metadata?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type logAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  timestamp?: Prisma.SortOrder
 }
 
 export type logMaxOrderByAggregateInput = {
@@ -365,6 +413,8 @@ export type logMaxOrderByAggregateInput = {
   message?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type logMinOrderByAggregateInput = {
@@ -373,11 +423,14 @@ export type logMinOrderByAggregateInput = {
   message?: Prisma.SortOrder
   level?: Prisma.SortOrder
   timestamp?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type logSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
+  timestamp?: Prisma.SortOrder
 }
 
 export type logCreateNestedManyWithoutProjectInput = {
@@ -422,23 +475,36 @@ export type logUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
 }
 
+export type BigIntFieldUpdateOperationsInput = {
+  set?: bigint | number
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
 export type EnumLogLevelFieldUpdateOperationsInput = {
   set?: $Enums.LogLevel
 }
 
 export type logCreateWithoutProjectInput = {
+  id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
-  timestamp?: Date | string
+  timestamp: bigint | number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type logUncheckedCreateWithoutProjectInput = {
-  id?: number
+  id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
-  timestamp?: Date | string
+  timestamp: bigint | number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type logCreateOrConnectWithoutProjectInput = {
@@ -471,43 +537,54 @@ export type logScalarWhereInput = {
   AND?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
   OR?: Prisma.logScalarWhereInput[]
   NOT?: Prisma.logScalarWhereInput | Prisma.logScalarWhereInput[]
-  id?: Prisma.IntFilter<"log"> | number
+  id?: Prisma.BigIntFilter<"log"> | bigint | number
   project_id?: Prisma.IntFilter<"log"> | number
   message?: Prisma.StringFilter<"log"> | string
   metadata?: Prisma.JsonFilter<"log">
   level?: Prisma.EnumLogLevelFilter<"log"> | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFilter<"log"> | Date | string
+  timestamp?: Prisma.BigIntFilter<"log"> | bigint | number
+  createdAt?: Prisma.DateTimeFilter<"log"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"log"> | Date | string
 }
 
 export type logCreateManyProjectInput = {
-  id?: number
+  id?: bigint | number
   message: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: $Enums.LogLevel
-  timestamp?: Date | string
+  timestamp: bigint | number
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type logUpdateWithoutProjectInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type logUncheckedUpdateWithoutProjectInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type logUncheckedUpdateManyWithoutProjectInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   message?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   level?: Prisma.EnumLogLevelFieldUpdateOperationsInput | $Enums.LogLevel
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  timestamp?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -519,6 +596,8 @@ export type logSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
@@ -529,6 +608,8 @@ export type logSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
@@ -539,6 +620,8 @@ export type logSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["log"]>
 
@@ -549,9 +632,11 @@ export type logSelectScalar = {
   metadata?: boolean
   level?: boolean
   timestamp?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type logOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "message" | "metadata" | "level" | "timestamp", ExtArgs["result"]["log"]>
+export type logOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "message" | "metadata" | "level" | "timestamp" | "createdAt" | "updatedAt", ExtArgs["result"]["log"]>
 export type logInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
 }
@@ -568,12 +653,14 @@ export type $logPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     project: Prisma.$projectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: bigint
     project_id: number
     message: string
     metadata: runtime.JsonValue
     level: $Enums.LogLevel
-    timestamp: Date
+    timestamp: bigint
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["log"]>
   composites: {}
 }
@@ -998,12 +1085,14 @@ export interface Prisma__logClient<T, Null = never, ExtArgs extends runtime.Type
  * Fields of the log model
  */
 export interface logFieldRefs {
-  readonly id: Prisma.FieldRef<"log", 'Int'>
+  readonly id: Prisma.FieldRef<"log", 'BigInt'>
   readonly project_id: Prisma.FieldRef<"log", 'Int'>
   readonly message: Prisma.FieldRef<"log", 'String'>
   readonly metadata: Prisma.FieldRef<"log", 'Json'>
   readonly level: Prisma.FieldRef<"log", 'LogLevel'>
-  readonly timestamp: Prisma.FieldRef<"log", 'DateTime'>
+  readonly timestamp: Prisma.FieldRef<"log", 'BigInt'>
+  readonly createdAt: Prisma.FieldRef<"log", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"log", 'DateTime'>
 }
     
 

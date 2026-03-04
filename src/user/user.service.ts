@@ -17,7 +17,7 @@ export class UserService {
   async userDetails(request: Request) {
     try {
       const user = request.user;
-      const userDetails = await this.userRepository.findByIdWithSelection(user['id'], { id: true, email: true, name: true, timestamp: true });
+      const userDetails = await this.userRepository.findByIdWithSelection(user['id'], { id: true, email: true, name: true });
       return {
         status: HttpStatus.OK,
         message: "User details fetched successfully",

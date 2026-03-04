@@ -50,7 +50,7 @@ export class AuthService {
       const sessionData = {
         user_id: emailExists.id,
         session_id: crypto.randomUUID(),
-        user_agent: req.headers['user-agent']
+        user_agent: req.headers['user-agent'],
       }
 
       await this.sessionRepository.create(sessionData as session)
@@ -66,7 +66,7 @@ export class AuthService {
         email: emailExists.email,
         name: emailExists.name,
         id: Number(emailExists.id),
-        timestamp: emailExists.timestamp,
+        timestamp: emailExists.createdAt,
         access_token: access_token,
         refresh_token: refresh_token
       }

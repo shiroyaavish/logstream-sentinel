@@ -388,7 +388,8 @@ export const ModelName = {
   project: 'project',
   api_key: 'api_key',
   log: 'log',
-  session: 'session'
+  session: 'session',
+  alert: 'alert'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -404,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "project" | "api_key" | "log" | "session"
+    modelProps: "user" | "project" | "api_key" | "log" | "session" | "alert"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -778,6 +779,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    alert: {
+      payload: Prisma.$alertPayload<ExtArgs>
+      fields: Prisma.alertFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.alertFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.alertFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>
+        }
+        findFirst: {
+          args: Prisma.alertFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.alertFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>
+        }
+        findMany: {
+          args: Prisma.alertFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>[]
+        }
+        create: {
+          args: Prisma.alertCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>
+        }
+        createMany: {
+          args: Prisma.alertCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.alertCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>[]
+        }
+        delete: {
+          args: Prisma.alertDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>
+        }
+        update: {
+          args: Prisma.alertUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>
+        }
+        deleteMany: {
+          args: Prisma.alertDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.alertUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.alertUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>[]
+        }
+        upsert: {
+          args: Prisma.alertUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$alertPayload>
+        }
+        aggregate: {
+          args: Prisma.AlertAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAlert>
+        }
+        groupBy: {
+          args: Prisma.alertGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlertGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.alertCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlertCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -877,6 +952,17 @@ export const SessionScalarFieldEnum = {
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const AlertScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AlertScalarFieldEnum = (typeof AlertScalarFieldEnum)[keyof typeof AlertScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1122,6 +1208,7 @@ export type GlobalOmitConfig = {
   api_key?: Prisma.api_keyOmit
   log?: Prisma.logOmit
   session?: Prisma.sessionOmit
+  alert?: Prisma.alertOmit
 }
 
 /* Types for Logging */

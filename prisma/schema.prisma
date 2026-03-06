@@ -15,70 +15,71 @@ enum LogLevel {
 }
 
 model user {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  password  String
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  projects  project[]
-  sessions  session[]
+  projects project[]
+  sessions session[]
+  alerts   alert[]
 
   @@index([email])
 }
 
 model project {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   description String?
 
-  user_id     Int
-  user        user     @relation(fields: [user_id], references: [id])
+  user_id Int
+  user    user @relation(fields: [user_id], references: [id])
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  api_keys    api_key[]
-  logs        log[]
+  api_keys api_key[]
+  logs     log[]
 
   @@index([user_id])
   @@index([createdAt])
 }
 
 model api_key {
-  id         Int      @id @default(autoincrement())
-  key        String   @unique
+  id  Int    @id @default(autoincrement())
+  key String @unique
 
   project_id Int
-  project    project  @relation(fields: [project_id], references: [id])
+  project    project @relation(fields: [project_id], references: [id])
 
-  status     Int      @default(0) // 0 active, 1 revoked, 2 deleted
+  status Int @default(0) // 0 active, 1 revoked, 2 deleted
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([project_id])
   @@index([status])
 }
 
 model log {
-  id         BigInt   @id @default(autoincrement())
+  id BigInt @id @default(autoincrement())
 
   project_id Int
-  project    project  @relation(fields: [project_id], references: [id])
+  project    project @relation(fields: [project_id], references: [id])
 
-  message    String
-  metadata   Json
+  message  String
+  metadata Json
 
-  level      LogLevel @default(INFO)
+  level LogLevel @default(INFO)
 
   // Unix timestamp (milliseconds)
-  timestamp  BigInt
+  timestamp BigInt
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // 🔥 Critical indexes for log systems
   @@index([project_id])
@@ -89,17 +90,30 @@ model log {
 }
 
 model session {
-  id         Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  user_id    Int
-  user       user     @relation(fields: [user_id], references: [id])
+  user_id Int
+  user    user @relation(fields: [user_id], references: [id])
 
   session_id String
   user_agent String
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([session_id])
   @@index([user_id])
+}
+
+model alert {
+  id Int @id @default(autoincrement())
+
+  user_id Int
+  user    user @relation(fields: [user_id], references: [id])
+
+  type      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type, user_id, createdAt])
 }

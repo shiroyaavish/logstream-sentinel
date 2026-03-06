@@ -62,3 +62,8 @@ export type log = Prisma.logModel
  * 
  */
 export type session = Prisma.sessionModel
+/**
+ * Model alert
+ * 
+ */
+export type alert = Prisma.alertModel

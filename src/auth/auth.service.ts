@@ -116,8 +116,30 @@ export class AuthService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
+  async logout(req: Request) {
+    try {
+      const user = req.user
+      const session = req.session
+
+      const sessionData = await this.sessionRepository.findBySessionId(session.session_id)
+      if (!sessionData) {
+        return {
+          status: HttpStatus.OK,
+          message: "Logout successfully."
+        }
+      }
+
+      await this.sessionRepository.delete(sessionData.id);
+
+      return {
+        status: HttpStatus.OK,
+        message: "Logout successfully."
+      }
+
+    } catch (error) {
+      console.error("Error while logout user :: ", error)
+      throw error;
+    }
   }
 
   update(id: number, updateAuthDto: UpdateAuthDto) {

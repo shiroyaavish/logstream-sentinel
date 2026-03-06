@@ -45,7 +45,7 @@ export class ProjectService {
   async generateApiKey(request: Request, generateApiKeyDto: GenerateApiKeyDto) {
     try {
       const { project_id } = generateApiKeyDto
-      const user = request.user
+      const user: any = request.user
       const projectExists = await this.projectRepository.findById(project_id)
       if (!projectExists) {
         throw new HttpException({
@@ -96,13 +96,18 @@ export class ProjectService {
       }
       const data = await this.projectRepository.findAll(query, Number(offset) || 0, Number(limit) || 15)
       const totalRecord = await this.projectRepository.countDocuments(query)
+      const projectWithKey = userId && await this.apiKeyRepository.countProjectKey(userId as number)
 
+      const activeApiKey = userId && await this.apiKeyRepository.countActiveApiKey(userId as number)
+      console.log("activeApiKey === ",activeApiKey)
       return {
         status: HttpStatus.OK,
         message: "Data fetched successfully.",
         data: {
           list: data,
-          totalRecord
+          totalRecord,
+          projectWithKey,
+          activeApiKey
         }
       }
 
@@ -130,7 +135,7 @@ export class ProjectService {
       }
 
       const apiKeyDetails = await this.apiKeyRepository.findByProjectId(projectDetails.id, userId)
-      console.log("API Key details :: ", apiKeyDetails)
+      // console.log("API Key details :: ", apiKeyDetails)
       const data = {
         ...projectDetails,
         api_key_exists: apiKeyDetails?.key ? true : false,

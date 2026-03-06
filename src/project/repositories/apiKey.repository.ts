@@ -33,4 +33,10 @@ export class ApiKeyRepository implements IApiKeyRepository {
     async updateStatus(id: number, status: number): Promise<api_key> {
         return await this.prisma.api_key.update({ where: { id }, data: { status } })
     }
+    async countProjectKey(id: number): Promise<number> {
+        return await this.prisma.api_key.count({ where: { project: { user_id: id }, status: { in: [1, 0] } } })
+    }
+    async countActiveApiKey(id: number): Promise<number> {
+        return await this.prisma.api_key.count({ where: { project: { user_id: id }, status: 0 } })
+    }
 }

@@ -30,7 +30,7 @@ export class LogProcessor extends WorkerHost {
             // console.log("Logs data :: ", data)
             const logsData = await this.logRepository.createMany(data)
             // console.log("Logs data :: ", logsData)
-            console.log(project.user_id)
+            // console.log(project.user_id)
             if (this.eventGateway.checkRoomExists(`project_${String(project.id)}`)) {
                 this.eventGateway.sendToUser(`project_${String(project.id)}`, "set_logs", JSON.stringify(logsData))
             } else {

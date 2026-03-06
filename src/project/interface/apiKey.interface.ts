@@ -10,6 +10,7 @@ export interface IApiKeyRepository {
     deleteOne(id: number): Promise<api_key>
     findByKey(key: string): Promise<api_key | null>
     updateStatus(id: number, status: number): Promise<api_key>
+    countProjectKey(id: number): Promise<number>
 }
 
 export const API_KEY_REPOSITORY = Symbol("API_KEY_REPOSITORY")

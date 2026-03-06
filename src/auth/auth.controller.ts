@@ -4,6 +4,7 @@ import { CreateAuthDto, RefreshTokenDto, SignInDto } from './dto/create-auth.dto
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { Request } from 'express';
 import { RefreshGuard } from './lib/refresh.guard';
+import { JwtAuthGuard } from './lib/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -25,9 +26,10 @@ export class AuthController {
     return this.authService.refreshToken(req);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  @Get('logout')
+  @UseGuards(JwtAuthGuard)
+  findOne(@Req() req: Request) {
+    return this.authService.logout(req);
   }
 
   @Patch(':id')
@@ -39,4 +41,5 @@ export class AuthController {
   remove(@Param('id') id: string) {
     return this.authService.remove(+id);
   }
+
 }

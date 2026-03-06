@@ -72,7 +72,7 @@ export class WsGuard implements CanActivate {
         // Attach user to socket
         client.user = user;
         client.session = session;
-        console.log(`User Connected :: ${user.id}`);
+        // console.log(`User Connected :: ${user.id}`);
         return true;
     }
 }

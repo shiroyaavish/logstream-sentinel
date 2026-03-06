@@ -25,7 +25,7 @@ export class WebsocketService {
 
   async joinRoom(client: Socket) {
     const user = (client as any).user;
-    console.log("User details :: ", user)
+    // console.log("User details :: ", user)
     if (user) {
       const userId = user.id;
       client.join(String(userId));

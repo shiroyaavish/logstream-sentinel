@@ -5,6 +5,14 @@ import { Request } from "express";
 import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import { ISessionRepository, SESSION_REPOSITORY } from "src/user/interface/session.interface";
 import { IUserRepository, USER_REPOSITORY } from "src/user/interface/user.interface";
+
+declare global {
+    namespace Express {
+        interface Request {
+            session?: any;
+        }
+    }
+}
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     private logger = new Logger(JwtStrategy.name);
@@ -25,7 +33,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             this.logger.log(`JWT Payload :: ${JSON.stringify(payload)}`);
             const session = await this.sessionRepository.findBySessionId(payload.sid);
             if (!session) {
-                console.log('Session not found for sid :: ', payload.sid);
+                // console.log('Session not found for sid :: ', payload.sid);
                 throw new HttpException({
                     status: HttpStatus.UNAUTHORIZED,
                     message: "session not found",
@@ -38,7 +46,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
                     message: "user not found",
                 }, HttpStatus.UNAUTHORIZED);
             }
-            // req.user = user;
+            req.session = session;
 
             done(null, user);
         } catch (error) {

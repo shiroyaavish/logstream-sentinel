@@ -17,6 +17,9 @@ export class SignInDto {
 
     @IsString()
     password: string;
+
+    @IsString()
+    token?: string
 }
 
 export class RefreshTokenDto {

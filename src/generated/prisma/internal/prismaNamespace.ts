@@ -947,6 +947,7 @@ export const SessionScalarFieldEnum = {
   user_id: 'user_id',
   session_id: 'session_id',
   user_agent: 'user_agent',
+  token: 'token',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

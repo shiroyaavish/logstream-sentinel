@@ -38,7 +38,7 @@ export class AuthService {
 
   async signin(req: Request, signInDto: SignInDto) {
     try {
-      const { email, password } = signInDto;
+      const { email, password, token } = signInDto;
       const emailExists = await this.userRepository.findByEmail(email);
       if (!emailExists) {
         throw new HttpException({ status: HttpStatus.BAD_REQUEST, message: "Email not valid." }, HttpStatus.BAD_REQUEST);
@@ -51,6 +51,7 @@ export class AuthService {
         user_id: emailExists.id,
         session_id: crypto.randomUUID(),
         user_agent: req.headers['user-agent'],
+        token
       }
 
       await this.sessionRepository.create(sessionData as session)

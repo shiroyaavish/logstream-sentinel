@@ -17,4 +17,7 @@ export class SessionRepository implements ISessionRepository {
             where: { session_id }
         })
     }
+    async findAll(query: any): Promise<session[]> {
+        return this.prisma.session.findMany(query)
+    }
 }

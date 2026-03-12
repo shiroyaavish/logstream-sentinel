@@ -8,6 +8,8 @@ import { SESSION_REPOSITORY } from 'src/user/interface/session.interface';
 import { USER_REPOSITORY } from 'src/user/interface/user.interface';
 import { SessionRepository } from 'src/user/repositories/session.repository';
 import { UserRepository } from 'src/user/repositories/user.repository';
+import { FirebaseService } from './services/firebase.service';
+import { NotificationService } from './services/notification.service';
 
 @Global()
 @Module({
@@ -31,8 +33,10 @@ import { UserRepository } from 'src/user/repositories/user.repository';
         {
             provide: LOG_REPOSITORY,
             useClass: LogRepository
-        }
+        },
+        FirebaseService,
+        NotificationService
     ],
-    exports: [PROJECT_REPOSITORY, USER_REPOSITORY, SESSION_REPOSITORY, API_KEY_REPOSITORY, LOG_REPOSITORY]
+    exports: [PROJECT_REPOSITORY, USER_REPOSITORY, SESSION_REPOSITORY, API_KEY_REPOSITORY, LOG_REPOSITORY, FirebaseService, NotificationService]
 })
 export class SharedModule { }

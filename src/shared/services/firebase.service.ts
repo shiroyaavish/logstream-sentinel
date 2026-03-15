@@ -1,13 +1,27 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import admin from 'firebase-admin';
-import serviceAccount from '../../config/firebase';
 
 @Injectable()
-export class FirebaseService {
-    constructor() {
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
-        });
+export class FirebaseService implements OnModuleInit {
+    constructor(private configService: ConfigService) {
+    }
+    onModuleInit() {
+
+        const privateKey = this.configService
+            .get<string>("FIREBASE_PRIVATE_KEY")
+            ?.replace(/\\n/g, "\n");
+
+        if (!admin.apps.length) {
+            admin.initializeApp({
+                credential: admin.credential.cert({
+                    projectId: this.configService.get<string>("FIREBASE_PROJECT_ID"),
+                    clientEmail: this.configService.get<string>("FIREBASE_CLIENT_EMAIL"),
+                    privateKey,
+                }),
+            });
+        }
+
     }
 
     async sendNotification(tokens: string[], title: string, message: string, data: Record<string, any>) {
